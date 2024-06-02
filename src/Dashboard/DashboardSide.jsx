@@ -3,7 +3,7 @@ import useRole from "../Hooks/useRole";
 
 const DashboardSide = () => {
     // const [role] = useRole();
-    const role = "admin"
+    const role = "hr"
     console.log(role)
 
     if (role === "admin") {

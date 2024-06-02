@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
 import { Table, Button, Modal, Form, InputNumber, Typography, message, Card, Row, Col, Switch } from 'antd';
-import useAxiosPublic from '../../Hooks/useAxiosPublic';
 import Swal from 'sweetalert2';
 import { useQuery } from '@tanstack/react-query';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
 
 const { Title } = Typography;
 
 const AllEmployee = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const [viewMode, setViewMode] = useState('table');
 
 
@@ -17,7 +17,7 @@ const AllEmployee = () => {
   const {data: employees = [], isLoading, refetch } = useQuery({
     queryKey: ["employees"],
     queryFn: async () => {
-      const res = await axiosPublic.get("/users");
+      const res = await axiosSecure.get("/users");
       return res.data;
     }
   })
@@ -33,7 +33,7 @@ const AllEmployee = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const response = await axiosPublic.patch(`/users/${employee.email}`, { isFired: true });
+          const response = await axiosSecure.patch(`/users/${employee.email}`, { isFired: true });
           if (response.data.modifiedCount > 0) {
             Swal.fire(
               'Deleted!',
@@ -62,7 +62,7 @@ const AllEmployee = () => {
 
   const handleMakeHR = async (employee) => {
     try {
-      await axiosPublic.patch(`/users/${employee.email}`, { role: 'hr' });
+      await axiosSecure.patch(`/users/${employee.email}`, { role: 'hr' });
       message.success(`${employee.name} is now an HR.`);
       refetch();
     } catch (error) {
@@ -79,7 +79,7 @@ const AllEmployee = () => {
   const handleSalary = async (values) => {
     try {
         console.log(selectedEmployee, values)
-      await axiosPublic.patch(`/users/${selectedEmployee.email}`, { salary: values.salary });
+      await axiosSecure.patch(`/users/${selectedEmployee.email}`, { salary: values.salary });
       message.success(`${selectedEmployee.name}'s salary has been updated.`);
       setIsModalVisible(false);
       refetch();

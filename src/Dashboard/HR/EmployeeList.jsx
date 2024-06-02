@@ -15,7 +15,6 @@ const EmployeeList = () => {
 
   const handleToggleVerified = async (record) => {
     try {
-      // Assuming you have an API endpoint for toggling the verified status
       const res = await axiosPublic.patch(`/users/verify/${record.email}`);
       message.success(res.data.message);
     } catch (error) {
@@ -25,14 +24,13 @@ const EmployeeList = () => {
   };
 
   const handlePay = (record) => {
-    console.log(record);
     setSelectedEmployee(record);
+    setPaymentAmount(record.salary); // Assuming you want to set the salary amount
     setPayModalVisible(true);
   };
 
   const handlePayConfirm = async () => {
     try {
-      // Assuming you have an API endpoint for paying the salary
       const res = await axiosPublic.post("/pay-salary", {
         email: selectedEmployee.email,
         amount: paymentAmount,
@@ -41,21 +39,22 @@ const EmployeeList = () => {
       });
       message.success(res.data.message);
       setPayModalVisible(false);
+      setPaymentAmount("");
+      setPaymentMonth("");
+      setPaymentYear("");
     } catch (error) {
       console.error("Failed to pay salary", error);
       message.error("Failed to pay salary");
     }
   };
 
-
-  const {data : employees =[], isLoading } = useQuery({
-    queryKey: ["employees", handleToggleVerified],
+  const { data: employees = [], isLoading, error } = useQuery({
+    queryKey: ["employees"],
     queryFn: async () => {
       const res = await axiosPublic.get("/users");
       return res.data;
     }
   });
-
 
   const columns = [
     {
@@ -69,17 +68,17 @@ const EmployeeList = () => {
       key: "email",
     },
     {
-        title: "Verified",
-        dataIndex: "isVerified",
-        key: "isVerified",
-        render: (verified, record) => (
-          <Button
-            onClick={() => handleToggleVerified(record)}
-          >
-            {verified ? "✅" : "❌"}
+      title: "Verified",
+      dataIndex: "isVerified",
+      key: "isVerified",
+      render: (verified, record) => (
+        verified ? "✅" : (
+          <Button onClick={() => handleToggleVerified(record)}>
+            ❌
           </Button>
-        ),
-      },
+        )
+      ),
+    },
     {
       title: "Bank Account",
       dataIndex: "bank_account_no",
@@ -112,13 +111,21 @@ const EmployeeList = () => {
     },
   ];
 
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error loading employees</div>;
+  }
+
   return (
     <div>
       <h1 className="text-3xl font-bold text-center mb-5">Employee List</h1>
-      <Table dataSource={employees} columns={columns} />
+      <Table dataSource={employees} columns={columns} rowKey="email" />
       <Modal
         title={`Pay Salary to ${selectedEmployee?.name}`}
-        visible={payModalVisible}
+        open={payModalVisible}
         onOk={handlePayConfirm}
         onCancel={() => setPayModalVisible(false)}
       >

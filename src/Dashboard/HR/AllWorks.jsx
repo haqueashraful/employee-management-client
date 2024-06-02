@@ -1,29 +1,29 @@
 import { useState, useEffect } from "react";
 import { Select, Table, Typography } from "antd";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
 const { Option } = Select;
 const { Title } = Typography;
 
 const AllWorks = () => {
   const axiosPublic = useAxiosPublic();
-  const [employees, setEmployees] = useState([]);
   const [months, setMonths] = useState([]);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
   const [selectedMonth, setSelectedMonth] = useState();
   const [workRecords, setWorkRecords] = useState([]);
   const [totalWorkHours, setTotalWorkHours] = useState(0);
 
-  useEffect(() => {
-    const fetchEmployees = async () => {
-      try {
-        const response = await axiosPublic.get("/users");
-        setEmployees(response.data);
-      } catch (error) {
-        console.error("Error fetching employees:", error);
-      }
-    };
 
+  const {data : employees = [], isLoading, refetch } = useQuery({
+    queryKey: ["employees"],
+    queryFn: async () => {
+      const res = await axiosPublic.get("/users");
+      return res.data;
+    }
+  })    
+
+  useEffect(() => {
     const fetchMonths = async () => {
       // Fetch months from your database or generate dynamically
       const months = [
@@ -43,7 +43,7 @@ const AllWorks = () => {
       setMonths(months);
     };
 
-    fetchEmployees();
+    refetch();
     fetchMonths();
   }, [axiosPublic]);
 
@@ -59,9 +59,8 @@ const AllWorks = () => {
         const response = await axiosPublic.get(uri);
         console.log(response.data)
         setWorkRecords(response.data);
-
         const totalHours = response.data.reduce(
-          (total, record) => total + record.hours,
+          (total, record) => total + parseInt(record.hours),
           0
         );
         setTotalWorkHours(totalHours);
@@ -91,7 +90,7 @@ const AllWorks = () => {
   return (
     <div>
       <div className="flex justify-between">
-        <div>
+        <div className="flex items-center">
           <Title level={3}>Filter by Employee:</Title>
           <Select
             defaultValue="All Employees"
@@ -106,7 +105,7 @@ const AllWorks = () => {
             ))}
           </Select>
         </div>
-        <div>
+        <div className="flex items-center">
           <Title level={3}>Filter by Month:</Title>
           <Select
             defaultValue="All Months"
@@ -122,10 +121,10 @@ const AllWorks = () => {
           </Select>
         </div>
       </div>
+      <Table dataSource={workRecords} columns={columns} />
       <div>
         <Title level={3}>Total Work Hours: {totalWorkHours}</Title>
       </div>
-      <Table dataSource={workRecords} columns={columns} />
     </div>
   );
 };
