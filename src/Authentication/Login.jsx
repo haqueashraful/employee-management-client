@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import useAuth from "../Hooks/useAuth";
 import SocialLogin from "../Components/SocialLogin";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
+import { Button } from "antd";
 
 const Login = () => {
   const { logInUser, setLoader } = useAuth();
@@ -11,24 +12,26 @@ const Login = () => {
   const location = useLocation();
   const axiosPublic = useAxiosPublic();
   const from = location.state?.from?.pathname || "/";
-  
+
+  const [loginError, setLoginError] = useState("");
+
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const onSubmit = async (data) => {
     try {
+      setLoginError(""); // Reset the error message
       const result = await logInUser(data.email, data.password);
       navigate(from, { replace: true });
       setLoader(false);
     } catch (error) {
       console.error("Login failed", error);
+      setLoginError("Invalid email or password");
       setLoader(false);
     }
   };
 
   return (
-    <div
-      className="w-full min-h-screen p-28 overflow-hidden"
-    >
+    <div className="w-full min-h-screen p-28 overflow-hidden">
       <div className="border-2 border-black shadow-xl w-full h-full overflow-hidden py-8 px-20 grid grid-cols-1 md:grid-cols-2 justify-center items-center gap-8">
         <div>
           <h1 className="text-3xl font-bold text-center">Login</h1>
@@ -57,13 +60,14 @@ const Login = () => {
               />
               {errors.password && <span className="text-red-500">{errors.password.message}</span>}
             </div>
+            {loginError && <p className="text-red-500">{loginError}</p>}
             <div className="text-center">
-              <button
-                className="border-b-4 border-black rounded-md px-5 py-2 hover:bg-black hover:text-white font-semibold"
+              <Button
+                className=""
                 type="submit"
               >
                 Login
-              </button>
+              </Button>
             </div>
           </form>
           <p className="text-center">Don't have an account? <Link to="/register">Register</Link></p>

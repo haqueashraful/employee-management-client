@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import { GithubAuthProvider, GoogleAuthProvider, TwitterAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import auth from "../firebase/firebase.config";
+import Swal from "sweetalert2";
 
 
 export const Context = createContext();
@@ -73,9 +74,25 @@ export const MyContext = ({ children }) => {
 
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      const email = currentUser.email;
+      // Check if the user is fired
+      const firedResponse = await axiosPublic.get(`/users/fired/${email}`);
+      const isFired = firedResponse.data.isFired;
+      if (isFired) {
+        await logOutUser();
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: "Login failed",
+          text: "You are not allowed to log in.",
+          showConfirmButton: true,
+        });
+        return;
+      }
+
       setUser(currentUser);
-      console.log(currentUser);
+
       if (currentUser) {
         axiosPublic.post("/jwt", { email : currentUser?.email})
           .then((response) => {
@@ -89,7 +106,7 @@ export const MyContext = ({ children }) => {
           });
       } else {
         axiosPublic.post("/logout")
-        setLoader(false); // Only set loader to false, don't set user to null
+        setLoader(false); 
       }
     });
   

@@ -13,10 +13,13 @@ const SocialLogin = () => {
     try {
       const result = await signInWithGoogle();
       const user = result.user;
+     const email = user.email;
 
+     
+      // If the user is not fired, proceed with the login process
       await axiosPublic.post("/users", {
         name: user.displayName,
-        email: user.email,
+        email: email,
         role: "Employee",
         bank_account_no: "",
         designation: "",
