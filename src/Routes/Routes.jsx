@@ -7,6 +7,7 @@ import Register from '../Authentication/Register';
 import WorkSheet from '../Dashboard/Employee/WorkSheet';
 import Dashboard from '../Layout/Dashboard';
 import PaymentHistory from '../Dashboard/Employee/PaymentHistory';
+import EmployeeList from '../Dashboard/HR/EmployeeList';
 
 const Routes = createBrowserRouter([
     {
@@ -42,6 +43,18 @@ const Routes = createBrowserRouter([
         {
             path: 'payment_history',
             element: <PaymentHistory />
+        },
+        {
+            path: 'employee-list',
+            element: <EmployeeList />
+        },
+        {
+            path: 'add-users',
+            element: <div>Add Users</div>
+        },
+        {
+            path: 'manage-users',
+            element: <div>Manage Users</div>
         }
     ]
    }

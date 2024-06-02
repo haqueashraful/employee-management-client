@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import useRole from "../Hooks/useRole";
 
 const DashboardSide = () => {
-    const [role] = useRole();
+    // const [role] = useRole();
+    const role = "hr"
     console.log(role)
 
     if (role === "admin") {
@@ -29,7 +30,7 @@ const DashboardSide = () => {
                 <h1 className="text-3xl font-bold text-center">Dashboard Side</h1>
                 <ul>
                     <li>
-                        <Link to="/dashboard/my-works">My Works</Link>
+                        <Link to="/dashboard/employee-list">Employee List</Link>
                     </li>
                     <li>
                         <Link to="/dashboard/add-works">Add Works</Link>
