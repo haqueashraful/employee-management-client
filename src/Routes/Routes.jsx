@@ -10,6 +10,7 @@ import PaymentHistory from '../Dashboard/Employee/PaymentHistory';
 import EmployeeList from '../Dashboard/HR/EmployeeList';
 import EmployeeDetails from '../Dashboard/HR/EmployeeDetails';
 import AllWorks from '../Dashboard/HR/AllWorks';
+import AllEmployee from '../Dashboard/Admin/AllEmloyee';
 
 const Routes = createBrowserRouter([
     {
@@ -63,7 +64,10 @@ const Routes = createBrowserRouter([
         },
 
         // admin
-
+        {
+            path: 'all-employee-list',
+            element: <AllEmployee />
+        }
     ]
    }
   

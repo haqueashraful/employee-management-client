@@ -3,7 +3,7 @@ import useRole from "../Hooks/useRole";
 
 const DashboardSide = () => {
     // const [role] = useRole();
-    const role = "hr"
+    const role = "admin"
     console.log(role)
 
     if (role === "admin") {
@@ -12,13 +12,7 @@ const DashboardSide = () => {
                 <h1 className="text-3xl font-bold text-center">Dashboard Side</h1>
                 <ul>
                     <li>
-                        <Link to="/dashboard/all-users">All Users</Link>
-                    </li>
-                    <li>
-                        <Link to="/dashboard/add-users">Add Users</Link>
-                    </li>
-                    <li>
-                        <Link to="/dashboard/manage-users">Manage Users</Link>
+                        <Link to="/dashboard/all-employee-list">All Users</Link>
                     </li>
                 </ul>
             </div>
