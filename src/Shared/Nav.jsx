@@ -41,17 +41,24 @@ const Nav = () => {
 
   return (
     <div className="navbar bg-base-white w-full h-20 flex justify-between items-center">
-      <div>Nav bar</div>
+      <div>
+        <h1 className="text-3xl font-bold">Employ Care</h1>
+      </div>
       <div>
         <ul className="flex justify-center items-center gap-5">
           <li>
             <NavLink to="/">
-              <Button>Home</Button>
+            <Button className="!border-blue-700">Home</Button>
             </NavLink>
           </li>
           <li>
             <NavLink to="/contact">
-              <Button>Contact</Button>
+              <Button className="!border-blue-700">Contact</Button>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/dashboard/work-sheet">
+              <Button className="!border-blue-700">Work sheet</Button>
             </NavLink>
           </li>
         </ul>
@@ -59,7 +66,7 @@ const Nav = () => {
       <div>
         {user ? (
           <Dropdown overlay={menu} trigger={['click']}>
-            <Button>
+            <Button className="!border-blue-700">
               Profile
             </Button>
           </Dropdown>

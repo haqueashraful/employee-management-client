@@ -19,6 +19,7 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     try {
+      console.log(data);
       setLoginError(""); // Reset the error message
       const result = await logInUser(data.email, data.password);
       navigate(from, { replace: true });
@@ -63,8 +64,8 @@ const Login = () => {
             {loginError && <p className="text-red-500">{loginError}</p>}
             <div className="text-center">
               <Button
-                className=""
-                type="submit"
+                className="!bg-blue-700 !text-white"
+                htmlType="submit"  // Added htmlType="submit" here
               >
                 Login
               </Button>
