@@ -36,7 +36,7 @@ const WorkSheet = () => {
     };
 
     try {
-      await axiosPublic.post("/works", newEntry);
+      await axiosPublic.post("/works", {...newEntry, name : user.displayName});
       setSubmit(true);
       reset({
         task: "Sales",

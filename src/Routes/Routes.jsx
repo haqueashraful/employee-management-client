@@ -8,6 +8,8 @@ import WorkSheet from '../Dashboard/Employee/WorkSheet';
 import Dashboard from '../Layout/Dashboard';
 import PaymentHistory from '../Dashboard/Employee/PaymentHistory';
 import EmployeeList from '../Dashboard/HR/EmployeeList';
+import EmployeeDetails from '../Dashboard/HR/EmployeeDetails';
+import AllWorks from '../Dashboard/HR/AllWorks';
 
 const Routes = createBrowserRouter([
     {
@@ -36,6 +38,7 @@ const Routes = createBrowserRouter([
     path: '/dashboard',
     element: <Dashboard />,
     children: [
+        // Employee
         {
             path: 'work-sheet',
             element: <WorkSheet />
@@ -44,18 +47,23 @@ const Routes = createBrowserRouter([
             path: 'payment_history',
             element: <PaymentHistory />
         },
+
+        // HR
         {
             path: 'employee-list',
             element: <EmployeeList />
         },
         {
-            path: 'add-users',
-            element: <div>Add Users</div>
+            path: 'employee/:email',
+            element: <EmployeeDetails />
         },
         {
-            path: 'manage-users',
-            element: <div>Manage Users</div>
-        }
+            path: 'progress',
+            element: <AllWorks />
+        },
+
+        // admin
+
     ]
    }
   

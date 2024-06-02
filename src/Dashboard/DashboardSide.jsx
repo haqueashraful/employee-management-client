@@ -33,10 +33,7 @@ const DashboardSide = () => {
                         <Link to="/dashboard/employee-list">Employee List</Link>
                     </li>
                     <li>
-                        <Link to="/dashboard/add-works">Add Works</Link>
-                    </li>
-                    <li>
-                        <Link to="/dashboard/manage-works">Manage Works</Link>
+                        <Link to="/dashboard/progress">Progress</Link>
                     </li>
                 </ul>
             </div>

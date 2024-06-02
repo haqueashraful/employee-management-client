@@ -2,9 +2,11 @@ import { useState } from "react";
 import { Table, Button, Modal, Input, message } from "antd";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 const EmployeeList = () => {
   const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
   const [payModalVisible, setPayModalVisible] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
   const [paymentAmount, setPaymentAmount] = useState("");
@@ -80,8 +82,8 @@ const EmployeeList = () => {
       },
     {
       title: "Bank Account",
-      dataIndex: "bankAccount",
-      key: "bankAccount",
+      dataIndex: "bank_account_no",
+      key: "bank_account_no",
     },
     {
       title: "Salary",
@@ -105,7 +107,7 @@ const EmployeeList = () => {
       title: "Details",
       key: "details",
       render: (_, record) => (
-        <Button onClick={() => console.log("View details", record)}>Details</Button>
+        <Button onClick={() => navigate(`/dashboard/employee/${record.email}`)}>Details</Button>
       ),
     },
   ];
