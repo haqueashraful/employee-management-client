@@ -57,8 +57,8 @@ const Nav = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/work-sheet">
-              <Button className="!border-blue-700">Work sheet</Button>
+            <NavLink to="/dashboard">
+              <Button className="!border-blue-700">Dashboard</Button>
             </NavLink>
           </li>
         </ul>

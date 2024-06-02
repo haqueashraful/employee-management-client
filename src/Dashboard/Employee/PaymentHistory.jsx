@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Table } from "antd";
-import useAuth from "../Hooks/useAuth";
-import useAxiosPublic from "../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import useAuth from "../../Hooks/useAuth";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const PaymentHistory = () => {
   const { user } = useAuth();
@@ -12,7 +12,7 @@ const PaymentHistory = () => {
   const { data: payments = [], isLoading } = useQuery({
     queryKey: ["payments", currentPage, user?.email],
     queryFn: async () => {
-      const res = await axiosPublic.get("/payments", {
+      const res = await axiosPublic.get(`/payments/${user?.email}`, {
         params: {
           page: currentPage,
         },

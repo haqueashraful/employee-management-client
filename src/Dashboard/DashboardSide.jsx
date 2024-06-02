@@ -1,17 +1,65 @@
-import useAdmin from "../Hooks/useAdmin";
+import { Link } from "react-router-dom";
+import useRole from "../Hooks/useRole";
 
 const DashboardSide = () => {
-    const [isAdmin] = useAdmin();
+    const [role] = useRole();
+    console.log(role)
 
-    
-    return (
-        <div className="w-64 bg-blue-700/60 h-screen">
-            <h1>Dashboard Side</h1>
-            <ul>
-               
-            </ul>
-        </div>
-    );
+    if (role === "admin") {
+        return (
+            <div className="w-64 bg-blue-700/60 min-h-screen max-h-screen">
+                <h1 className="text-3xl font-bold text-center">Dashboard Side</h1>
+                <ul>
+                    <li>
+                        <Link to="/dashboard/all-users">All Users</Link>
+                    </li>
+                    <li>
+                        <Link to="/dashboard/add-users">Add Users</Link>
+                    </li>
+                    <li>
+                        <Link to="/dashboard/manage-users">Manage Users</Link>
+                    </li>
+                </ul>
+            </div>
+        );
+    }
+    if(role === "hr"){
+        return (
+            <div className="w-64 bg-blue-700/60 min-h-screen">
+                <h1 className="text-3xl font-bold text-center">Dashboard Side</h1>
+                <ul>
+                    <li>
+                        <Link to="/dashboard/my-works">My Works</Link>
+                    </li>
+                    <li>
+                        <Link to="/dashboard/add-works">Add Works</Link>
+                    </li>
+                    <li>
+                        <Link to="/dashboard/manage-works">Manage Works</Link>
+                    </li>
+                </ul>
+            </div>
+        );
+    }
+    if (role === "employee") {
+        return (
+            <div className="w-64 bg-blue-700/60 min-h-screen">
+                <h1 className="text-3xl font-bold text-center">Dashboard Side</h1>
+                <ul>
+                    <li>
+                        <Link to="/dashboard/work-sheet">Work Sheet</Link>
+                    </li>
+                    <li>
+                        <Link to="/dashboard/payment_history">Payment History</Link>
+                    </li>
+                    <li>
+                        <Link to="/dashboard/manage-works">Manage Works</Link>
+                    </li>
+                </ul>
+            </div>
+        );
+    }
+    return <p>Loading...</p>;
 };
 
 export default DashboardSide;
