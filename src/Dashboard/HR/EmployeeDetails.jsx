@@ -40,9 +40,18 @@ const EmployeeDetails = () => {
   return (
     <div>
       <Title level={2}>{user.name}'s Details</Title>
-      <div>
-        <img src={user.photo} alt="Employee Photo" style={{ width: 200, height: 200, borderRadius: "50%" }} />
+      <div className="flex justify-center items-center gap-8">
+       <div>
+       <img src={user.photo} alt="Employee Photo" style={{ width: 200, height: 200, borderRadius: "10%" }} />
+       </div>
+        <div>
+          <h1>Name: {user.name}</h1>
+          <p>Email: {user.email}</p>
+          <p>role: {user.role}</p>
+          <p>Bank Account: {user.bank_account_no}</p>
+          <p>Salary: {user.salary}</p>
         <p>Designation: {user.designation}</p>
+        </div>
       </div>
       <div style={{ marginTop: 20 }}>
         <BarChart

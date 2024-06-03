@@ -11,13 +11,30 @@ const SocialLogin = () => {
 
   const handleGoogleLogin = async () => {
     try {
+      // Sign in with Google
       const result = await signInWithGoogle();
       const user = result.user;
-     const email = user.email;
-
-     
-      // If the user is not fired, proceed with the login process
-      await axiosPublic.post("/users", {
+      const email = user.email;
+  
+      // Check if the user already exists
+      const existingUserResponse = await axiosPublic.get(`/users/${email}`);
+      const existingUser = existingUserResponse.data;
+  
+      if (existingUser) {
+        Swal.fire({
+          position: "top-end",
+          icon: "info",
+          title: "User already exists",
+          text: "You are already registered.",
+          showConfirmButton: true,
+        });
+        // Redirect to the dashboard or some other page
+        navigate("/");
+        return; // Exit early
+      }
+  
+      // Post user data to your backend
+      const response = await axiosPublic.post("/users", {
         name: user.displayName,
         email: email,
         role: "Employee",
@@ -25,26 +42,42 @@ const SocialLogin = () => {
         designation: "",
         photo: user.photoURL,
       });
-
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "Login successfully",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-
-      navigate("/");
+  
+      // Check if the user data was successfully posted
+      if (response.data.acknowledged) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Login Successful",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        // Redirect to the dashboard
+        navigate("/dashboard");
+      } else {
+        // Handle errors if the user data posting fails
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: "Failed to login",
+          text: "Please try again later.",
+          showConfirmButton: true,
+        });
+      }
     } catch (error) {
+      // Handle errors from Google sign-in or Axios request
+      console.error("Error occurred during login:", error);
       Swal.fire({
         position: "top-end",
         icon: "error",
-        title: "Login failed",
-        text: error.message,
+        title: "Failed to login",
+        text: "Please try again later.",
         showConfirmButton: true,
       });
     }
   };
+  
+  
 
   return (
     <div>

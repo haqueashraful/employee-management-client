@@ -80,10 +80,10 @@ export const MyContext = ({ children }) => {
       // Check if the user is fired
       const firedResponse = await axiosPublic.get(`/users/fired/${email}`);
       const isFired = firedResponse.data.isFired;
-      console.log(isFired)
       if (isFired) {
         setUser(null);
         await logOutUser();
+        await axiosPublic.post("/logout")
         Swal.fire({
           position: "top-end",
           icon: "error",

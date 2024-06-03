@@ -31,7 +31,7 @@ const Nav = () => {
   const menu = (
     <Menu>
       <Menu.Item key="0">
-        <NavLink to="/profile">Profile</NavLink>
+        <NavLink>{user?.displayName}</NavLink>
       </Menu.Item>
       <Menu.Item key="1">
         <Button type="link" onClick={logout}>Log out</Button>
@@ -66,9 +66,9 @@ const Nav = () => {
       <div>
         {user ? (
           <Dropdown overlay={menu} trigger={['click']}>
-            <Button className="!border-none">
-              Profile
-            </Button>
+            <button className="">
+              <img src={user?.photoURL} className="w-10 h-10 rounded-full border" alt={user?.displayName} />
+            </button>
           </Dropdown>
         ) : (
           <NavLink to="/login">

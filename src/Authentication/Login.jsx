@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { Button } from "antd";
+import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import useAuth from "../Hooks/useAuth";
 import SocialLogin from "../Components/SocialLogin";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
-import { Button } from "antd";
 
 const Login = () => {
   const { logInUser, setLoader } = useAuth();
@@ -14,13 +15,14 @@ const Login = () => {
   const from = location.state?.from?.pathname || "/";
 
   const [loginError, setLoginError] = useState("");
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const onSubmit = async (data) => {
+    console.log(data);
     try {
-      console.log(data);
-      setLoginError(""); // Reset the error message
+      setLoginError(""); 
       const result = await logInUser(data.email, data.password);
       navigate(from, { replace: true });
       setLoader(false);
@@ -51,21 +53,29 @@ const Login = () => {
             </div>
             <div>
               <label className="block text-lg" htmlFor="password">Password</label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="Password"
-                {...register("password", { required: "Password is required" })}
-                className="w-full text-xl p-2 rounded-md"
-              />
+              <div className="relative">
+                <input
+                  type={passwordVisible ? "text" : "password"}
+                  name="password"
+                  id="password"
+                  placeholder="Password"
+                  {...register("password", { required: "Password is required" })}
+                  className="w-full text-xl p-2 rounded-md"
+                />
+                <span
+                  className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer"
+                  onClick={() => setPasswordVisible(!passwordVisible)}
+                >
+                  {passwordVisible ? <EyeTwoTone /> : <EyeInvisibleOutlined />}
+                </span>
+              </div>
               {errors.password && <span className="text-red-500">{errors.password.message}</span>}
             </div>
             {loginError && <p className="text-red-500">{loginError}</p>}
             <div className="text-center">
               <Button
                 className="!bg-blue-700 !text-white"
-                htmlType="submit"  // Added htmlType="submit" here
+                htmlType="submit"  
               >
                 Login
               </Button>

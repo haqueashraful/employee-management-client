@@ -146,7 +146,7 @@ const EmployeeList = () => {
             selectedEmployee={selectedEmployee}
             paymentMonth={paymentMonth}
             paymentYear={paymentYear}
-            onPaymentSuccess={handleModalClose}
+            handleModalClose={handleModalClose}
           />
         </Elements>
       </Modal>

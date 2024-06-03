@@ -1,40 +1,31 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
-import useAuth from "../../Hooks/useAuth";
+import PropTypes from "prop-types";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import moment from "moment";
 import { message } from "antd";
 import Swal from "sweetalert2";
 
-const PaymentForm = ({ salary, selectedEmployee, paymentMonth, paymentYear, onPaymentSuccess }) => {
-  const { user } = useAuth();
-  const [error, setError] = useState(null);
-  const [clientSecret, setClientSecret] = useState("");
+const PaymentForm = ({ salary, selectedEmployee, paymentMonth, paymentYear, handleModalClose }) => {
+  const axiosSecure = useAxiosSecure();
   const stripe = useStripe();
   const elements = useElements();
-  const axiosSecure = useAxiosSecure();
+  const [error, setError] = useState(null);
+  const [clientSecret, setClientSecret] = useState("");
   const [doublePay, setDoublePay] = useState(false);
 
-console.log(selectedEmployee)
   useEffect(() => {
     const checkDoublePayment = async () => {
       try {
-        const res = await axiosSecure.get(`/payments/${selectedEmployee?.email}?month=${paymentMonth.format("MMMM")}&year=${paymentYear.format("YYYY")}`);
-        if (res.data) {
-          console.log(res.data.exists);
-          setDoublePay(res.data.exists);
-        } else {
-          setDoublePay(false);
-        }
+        const res = await axiosSecure.get(`/payment/${selectedEmployee?.email}?month=${paymentMonth.format("MMMM")}&year=${paymentYear.format("YYYY")}`);
+        setDoublePay(res.data.exists);
       } catch (error) {
         console.error("Failed to check double payment", error);
       }
     };
-  
+
     checkDoublePayment();
   }, [axiosSecure, paymentMonth, paymentYear, selectedEmployee]);
-  
-
 
   useEffect(() => {
     if (salary) {
@@ -75,8 +66,8 @@ console.log(selectedEmployee)
       type: "card",
       card,
       billing_details: {
-        name: user?.displayName,
-        email: user?.email,
+        name: selectedEmployee?.name, 
+        email: selectedEmployee?.email,
       },
     });
 
@@ -104,7 +95,13 @@ console.log(selectedEmployee)
         });
 
         const paymentDetails = {
-         ...selectedEmployee,
+          email: selectedEmployee?.email,
+          salary: salary,
+          name: selectedEmployee?.name,
+          photo: selectedEmployee?.photo,
+          designation: selectedEmployee?.designation,
+          bankAccountNo: selectedEmployee?.bank_account_no,
+          role: selectedEmployee?.role,
           transactionId: paymentIntent.id,
           month: paymentMonth ? paymentMonth.format("MMMM") : null,
           year: paymentYear ? paymentYear.format("YYYY") : null,
@@ -116,7 +113,7 @@ console.log(selectedEmployee)
 
           if (result.data.success) {
             message.success("Salary paid successfully");
-            onPaymentSuccess();
+            handleModalClose(); 
           } else {
             message.error("Failed to record payment");
           }
@@ -154,6 +151,14 @@ console.log(selectedEmployee)
       </form>
     </div>
   );
+};
+
+PaymentForm.propTypes = {
+  salary: PropTypes.number.isRequired,
+  selectedEmployee: PropTypes.object.isRequired,
+  paymentMonth: PropTypes.object.isRequired,
+  paymentYear: PropTypes.object.isRequired,
+  handleModalClose: PropTypes.func.isRequired,
 };
 
 export default PaymentForm;

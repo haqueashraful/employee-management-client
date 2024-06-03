@@ -10,7 +10,7 @@ const AllWorks = () => {
   const axiosPublic = useAxiosPublic();
   const [months, setMonths] = useState([]);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
-  const [selectedMonth, setSelectedMonth] = useState();
+  const [selectedMonth, setSelectedMonth] = useState(null);
   const [workRecords, setWorkRecords] = useState([]);
   const [totalWorkHours, setTotalWorkHours] = useState(0);
 
@@ -57,7 +57,6 @@ const AllWorks = () => {
         console.log(selectedMonth)
         console.log(uri)
         const response = await axiosPublic.get(uri);
-        console.log(response.data)
         setWorkRecords(response.data);
         const totalHours = response.data.reduce(
           (total, record) => total + parseInt(record.hours),
@@ -78,6 +77,7 @@ const AllWorks = () => {
 
 
   const handleMonthChange = (value) => {
+    console.log(value, "value")
     setSelectedMonth(value);
   };
 

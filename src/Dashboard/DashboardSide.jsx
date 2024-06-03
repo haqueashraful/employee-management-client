@@ -2,8 +2,7 @@ import { Link } from "react-router-dom";
 import useRole from "../Hooks/useRole";
 
 const DashboardSide = () => {
-    // const [role] = useRole();
-    const role = "hr"
+    const [role] = useRole();
     console.log(role)
 
     if (role === "admin") {

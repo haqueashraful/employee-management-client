@@ -96,9 +96,18 @@ const AllEmployee = () => {
       key: 'name'
     },
     {
+      title: "image",
+      key: "photo",
+      render: (text, record) => (
+        <img src={record.photo} alt={record.name} className="h-10 w-10 rounded-full" />
+      )
+    },
+    {
       title: 'Designation',
-      dataIndex: 'designation',
-      key: 'designation'
+      key: 'designation',
+      render: (text, record) => (
+        <p>{record.designation ? record.designation : 'N/A'}</p>
+      )
     },
     {
       title: 'Make HR',
@@ -111,7 +120,7 @@ const AllEmployee = () => {
       title: 'Fire',
       key: 'fire',
       render: (text, record) => (
-        record.isFired ? 'Fired' : record.role !== 'admin' && <Button danger onClick={() => handleFire(record)}>Fire</Button>
+        record.isFired ? 'Fired' : record.role !== 'admin' ? <Button danger onClick={() => handleFire(record)}>Fire</Button> : <p>😂😂</p>
       )
     },
     {
@@ -124,23 +133,31 @@ const AllEmployee = () => {
   ];
 
   const renderCard = (employee) => (
-    <Card title={employee.name} style={{ marginBottom: 16 }}>
-      <p>Designation: {employee.designation}</p>
+    <Card hoverable title={employee.name} style={{ marginBottom: 16}}>
+      <div  className=' !flex !flex-col !gap-4'>
+        <div className='flex gap-4'>
+        <img className="w-10 h-10 rounded-full" src={employee.photo} alt={employee.name} />
+        <p>Email: {employee.email}</p>
+        </div>
+      <p>Designation: {employee.designation ? employee.designation : 'N/A'}</p>
       <p>
         {employee.role !== 'hr' && employee.role !== 'admin' ? (
           <Button onClick={() => handleMakeHR(employee)}>Make HR</Button>
         ) : <p> Role: <span className='uppercase'>{employee.role}</span></p>}
       </p>
-      <p>
+     <div className='flex justify-between gap-4'>
+     <p>
         {employee.isFired ? (
           'Fired'
         ) : (
-          employee.role !== 'admin' && <Button danger onClick={() => handleFire(employee)}>Fire</Button>
+          employee.role !== 'admin' ? <Button danger onClick={() => handleFire(employee)}>Fire</Button> : <p> 😂😂</p>
         )}
       </p>
       <p>
         <Button onClick={() => handleSalaryAdjustment(employee)}>Adjust Salary</Button>
       </p>
+     </div>
+      </div>
     </Card>
   );
 
