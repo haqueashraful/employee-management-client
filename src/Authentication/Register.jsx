@@ -7,6 +7,7 @@ import useAxiosPublic from "../Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import SocialLogin from "../Components/SocialLogin";
 import { Select, Button } from "antd";
+import img from '../assets/register (2).svg'
 
 const { Option } = Select;
 
@@ -62,8 +63,13 @@ const Register = () => {
   };
 
   return (
-    <div className="w-full min-h-screen p-28 overflow-hidden">
+    <div className="w-full min-h-screen p-5 lg:p-28 overflow-hidden">
       <div className="border-2 border-black shadow-2xl w-full h-full overflow-hidden py-8 px-20 grid grid-cols-1 md:grid-cols-2 justify-center items-center gap-8">
+        
+      <div>
+          <img className="" src={img} alt="" />
+        </div>
+        
         <div>
           <h1 className="text-3xl font-bold text-center">Register</h1>
           <form onSubmit={handleSubmit(handleRegister)} className="space-y-4">
@@ -160,6 +166,7 @@ const Register = () => {
             <SocialLogin />
           </div>
         </div>
+
       </div>
     </div>
   );

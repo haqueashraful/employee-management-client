@@ -6,6 +6,7 @@ import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import useAuth from "../Hooks/useAuth";
 import SocialLogin from "../Components/SocialLogin";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
+import img from '../assets/login (2).svg'
 
 const Login = () => {
   const { logInUser, setLoader } = useAuth();
@@ -34,8 +35,11 @@ const Login = () => {
   };
 
   return (
-    <div className="w-full min-h-screen p-28 overflow-hidden">
+    <div  className="w-full min-h-screen p-5 lg:p-28 overflow-hidden">
       <div className="border-2 border-black shadow-xl w-full h-full overflow-hidden py-8 px-20 grid grid-cols-1 md:grid-cols-2 justify-center items-center gap-8">
+        <div>
+          <img src={img} alt="" />
+        </div>
         <div>
           <h1 className="text-3xl font-bold text-center">Login</h1>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
