@@ -13,17 +13,54 @@ const PaymentForm = ({ salary, selectedEmployee, paymentMonth, paymentYear, onPa
   const stripe = useStripe();
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
+  const [doublePay, setDoublePay] = useState(false);
+
+console.log(selectedEmployee)
+  useEffect(() => {
+    const checkDoublePayment = async () => {
+      try {
+        const res = await axiosSecure.get(`/payments/${selectedEmployee?.email}?month=${paymentMonth.format("MMMM")}&year=${paymentYear.format("YYYY")}`);
+        if (res.data) {
+          console.log(res.data.exists);
+          setDoublePay(res.data.exists);
+        } else {
+          setDoublePay(false);
+        }
+      } catch (error) {
+        console.error("Failed to check double payment", error);
+      }
+    };
+  
+    checkDoublePayment();
+  }, [axiosSecure, paymentMonth, paymentYear, selectedEmployee]);
+  
+
 
   useEffect(() => {
     if (salary) {
-      axiosSecure.post("/create-payment-intent", { amount: salary, payment_method_types: ['card'] }).then((res) => {
-        setClientSecret(res.data.clientSecret);
-      });
+      axiosSecure.post("/create-payment-intent", { amount: salary, payment_method_types: ['card'] })
+        .then((res) => {
+          setClientSecret(res.data.clientSecret);
+        })
+        .catch((error) => {
+          console.error("Failed to create payment intent", error);
+        });
     }
   }, [axiosSecure, salary]);
 
   const handlePayment = async (event) => {
     event.preventDefault();
+
+    if (doublePay) {
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: "Salary already paid",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      return;
+    }
 
     if (!stripe || !elements) {
       return;
@@ -64,30 +101,32 @@ const PaymentForm = ({ salary, selectedEmployee, paymentMonth, paymentYear, onPa
           title: "Salary paid successfully",
           showConfirmButton: false,
           timer: 1500,
-        })
+        });
+
         const paymentDetails = {
-          email: user?.email,
-          name: user?.displayName,
-          photoURL: user?.photoURL,
-          salary,
+         ...selectedEmployee,
           transactionId: paymentIntent.id,
           month: paymentMonth ? paymentMonth.format("MMMM") : null,
           year: paymentYear ? paymentYear.format("YYYY") : null,
           status: "completed",
         };
 
-        const result = await axiosSecure.post("/payments", paymentDetails);
+        try {
+          const result = await axiosSecure.post("/payments", paymentDetails);
 
-        if (result.data.success) {
-          message.success("Salary paid successfully");
-          onPaymentSuccess();
-        } else {
+          if (result.data.success) {
+            message.success("Salary paid successfully");
+            onPaymentSuccess();
+          } else {
+            message.error("Failed to record payment");
+          }
+        } catch (error) {
+          console.error("Failed to record payment", error);
           message.error("Failed to record payment");
         }
       }
     }
   };
-
 
   return (
     <div>
