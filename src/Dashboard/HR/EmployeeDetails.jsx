@@ -15,7 +15,7 @@ const EmployeeDetails = () => {
   useEffect(() => {
     const fetchEmployeeDetails = async () => {
       try {
-        const response = await axiosPublic.get(`/employees/${email}`);
+        const response = await axiosPublic.get(`/users/${email}`);
         setEmployee(response.data);
         setLoading(false);
       } catch (error) {

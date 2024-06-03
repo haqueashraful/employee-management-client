@@ -1,17 +1,26 @@
-import { useState } from "react";
-import { Table, Button, Modal, Input, message } from "antd";
+import { useEffect, useState } from "react";
+import { Table, Button, Modal, DatePicker, message } from "antd";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import PaymentForm from "./PaymentForm"; // Adjust the path as necessary
+import moment from "moment";
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
+
+const { MonthPicker } = DatePicker;
 
 const EmployeeList = () => {
   const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const [payModalVisible, setPayModalVisible] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
-  const [paymentAmount, setPaymentAmount] = useState("");
-  const [paymentMonth, setPaymentMonth] = useState("");
-  const [paymentYear, setPaymentYear] = useState("");
+  const [paymentMonth, setPaymentMonth] = useState(null);
+  const [paymentYear, setPaymentYear] = useState(null);
 
   const handleToggleVerified = async (record) => {
     try {
@@ -25,27 +34,14 @@ const EmployeeList = () => {
 
   const handlePay = (record) => {
     setSelectedEmployee(record);
-    setPaymentAmount(record.salary); // Assuming you want to set the salary amount
     setPayModalVisible(true);
   };
 
-  const handlePayConfirm = async () => {
-    try {
-      const res = await axiosPublic.post("/pay-salary", {
-        email: selectedEmployee.email,
-        amount: paymentAmount,
-        month: paymentMonth,
-        year: paymentYear,
-      });
-      message.success(res.data.message);
-      setPayModalVisible(false);
-      setPaymentAmount("");
-      setPaymentMonth("");
-      setPaymentYear("");
-    } catch (error) {
-      console.error("Failed to pay salary", error);
-      message.error("Failed to pay salary");
-    }
+  const handleModalClose = () => {
+    setPayModalVisible(false);
+    setSelectedEmployee(null);
+    setPaymentMonth(null);
+    setPaymentYear(null);
   };
 
   const { data: employees = [], isLoading, error } = useQuery({
@@ -126,20 +122,33 @@ const EmployeeList = () => {
       <Modal
         title={`Pay Salary to ${selectedEmployee?.name}`}
         open={payModalVisible}
-        onOk={handlePayConfirm}
-        onCancel={() => setPayModalVisible(false)}
+        onCancel={handleModalClose}
+        footer={null}
       >
         <p>Salary Amount: {selectedEmployee?.salary}</p>
-        <Input
-          placeholder="Month"
+        <p>Bank Account: {selectedEmployee?.bank_account_no}</p>
+        <MonthPicker
+          placeholder="Select Month"
           value={paymentMonth}
-          onChange={(e) => setPaymentMonth(e.target.value)}
+          onChange={(date) => setPaymentMonth(date)}
+          style={{ width: "100%", marginBottom: 16 }}
         />
-        <Input
-          placeholder="Year"
+        <DatePicker
+          placeholder="Select Year"
           value={paymentYear}
-          onChange={(e) => setPaymentYear(e.target.value)}
+          onChange={(date) => setPaymentYear(date)}
+          picker="year"
+          style={{ width: "100%", marginBottom: 16 }}
         />
+        <Elements stripe={stripePromise}>
+          <PaymentForm 
+            salary={selectedEmployee?.salary} 
+            selectedEmployee={selectedEmployee}
+            paymentMonth={paymentMonth}
+            paymentYear={paymentYear}
+            onPaymentSuccess={handleModalClose}
+          />
+        </Elements>
       </Modal>
     </div>
   );

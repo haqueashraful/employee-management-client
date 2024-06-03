@@ -48,17 +48,17 @@ const Nav = () => {
         <ul className="flex justify-center items-center gap-5">
           <li>
             <NavLink to="/">
-            <Button className="!border-blue-700">Home</Button>
+            <Button className="!border-none">Home</Button>
             </NavLink>
           </li>
           <li>
             <NavLink to="/contact">
-              <Button className="!border-blue-700">Contact</Button>
+              <Button className="!border-none">Contact</Button>
             </NavLink>
           </li>
           <li>
             <NavLink to="/dashboard">
-              <Button className="!border-blue-700">Dashboard</Button>
+              <Button className="!border-none">Dashboard</Button>
             </NavLink>
           </li>
         </ul>
@@ -66,7 +66,7 @@ const Nav = () => {
       <div>
         {user ? (
           <Dropdown overlay={menu} trigger={['click']}>
-            <Button className="!border-blue-700">
+            <Button className="!border-none">
               Profile
             </Button>
           </Dropdown>

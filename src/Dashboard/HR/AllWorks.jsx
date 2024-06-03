@@ -45,7 +45,7 @@ const AllWorks = () => {
 
     refetch();
     fetchMonths();
-  }, [axiosPublic]);
+  }, [axiosPublic, refetch]);
 
   useEffect(() => {
     const fetchWorkRecords = async () => {
