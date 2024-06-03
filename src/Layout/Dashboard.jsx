@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import DashboardSide from "../Dashboard/DashboardSide";
+import DashboardSide from "../Dashboard/Dashboard/DashboardSide";
 
 const Dashboard = () => {
   return (

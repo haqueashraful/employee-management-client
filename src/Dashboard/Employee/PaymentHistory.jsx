@@ -3,6 +3,7 @@ import { Table } from "antd";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import CommonTable from "../../Components/CommonTable";
 
 const PaymentHistory = () => {
   const { user } = useAuth();
@@ -23,6 +24,11 @@ const PaymentHistory = () => {
 
   const columns = [
     {
+      title: "Sl.No",
+      dataIndex: "index",
+      key: "index",
+    },
+    {
       title: "Month",
       dataIndex: "month",
       key: "month",
@@ -42,12 +48,8 @@ const PaymentHistory = () => {
   return (
     <div>
       <h1 className="text-3xl font-bold text-center mb-5">Payment History</h1>
-      <Table
-        dataSource={payments}
-        columns={columns}
-        rowKey={(record) => record.transactionId}
-        pagination={{ pageSize: 5, onChange: setCurrentPage }}
-      />
+      <CommonTable data={payments} columns={columns} />
+    
     </div>
   );
 };

@@ -57,7 +57,7 @@ const Nav = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard">
+            <NavLink to="/dashboard/dash-home">
               <Button className="!border-none">Dashboard</Button>
             </NavLink>
           </li>

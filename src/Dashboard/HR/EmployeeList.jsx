@@ -8,6 +8,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import PaymentForm from "./PaymentForm"; // Adjust the path as necessary
 import moment from "moment";
+import CommonTable from "../../Components/CommonTable";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
@@ -118,7 +119,8 @@ const EmployeeList = () => {
   return (
     <div>
       <h1 className="text-3xl font-bold text-center mb-5">Employee List</h1>
-      <Table dataSource={employees} columns={columns} rowKey="email" />
+      {/* <Table dataSource={employees} columns={columns} rowKey="email" /> */}
+      <CommonTable data={employees} columns={columns} />
       <Modal
         title={`Pay Salary to ${selectedEmployee?.name}`}
         open={payModalVisible}

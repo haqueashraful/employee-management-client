@@ -5,13 +5,13 @@ import moment from "moment";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import CommonTable from "../../Components/CommonTable";
 
 const { Option } = Select;
 
 const WorkSheet = () => {
   const { user } = useAuth();
   const axiosPublic = useAxiosPublic();
-  const [submit, setSubmit] = useState(false);
   const { control, handleSubmit, reset } = useForm({
     defaultValues: {
       task: "Sales",
@@ -20,10 +20,10 @@ const WorkSheet = () => {
     },
   });
 
-  const { data: works = [], isLoading } = useQuery({
-    queryKey: ["works", submit, user?.email],
+  const { data: works = [], isLoading, refetch } = useQuery({
+    queryKey: ["works", user?.email],
     queryFn: async () => {
-      const res = await axiosPublic.get("/works");
+      const res = await axiosPublic.get(`/works/${user?.email}`);
       return res.data;
     },
   });
@@ -36,8 +36,8 @@ const WorkSheet = () => {
     };
 
     try {
-      await axiosPublic.post("/works", {...newEntry, name : user.displayName});
-      setSubmit(true);
+      await axiosPublic.post("/works", {...newEntry, name : user.displayName})
+      refetch();      
       reset({
         task: "Sales",
         hours: "",
@@ -125,12 +125,13 @@ const WorkSheet = () => {
       <div>
         <h1 className="text-center text-3xl text-black">Work data</h1>
       </div>
-      <Table
+      <CommonTable data={works} columns={columns} />
+      {/* <Table
         dataSource={dataSource}
         columns={columns}
         rowKey={(record) => record._id}
         pagination={{ pageSize: pageSize }}
-      />
+      /> */}
     </div>
   );
 };

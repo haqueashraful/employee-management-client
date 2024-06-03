@@ -11,6 +11,7 @@ import EmployeeList from '../Dashboard/HR/EmployeeList';
 import EmployeeDetails from '../Dashboard/HR/EmployeeDetails';
 import AllWorks from '../Dashboard/HR/AllWorks';
 import AllEmployee from '../Dashboard/Admin/AllEmloyee';
+import DashboardHome from '../Dashboard/Dashboard/DashboardHome';
 
 const Routes = createBrowserRouter([
     {
@@ -39,6 +40,10 @@ const Routes = createBrowserRouter([
     path: '/dashboard',
     element: <Dashboard />,
     children: [
+        {
+            path: 'dash-home',
+            element: <DashboardHome />
+        },
         // Employee
         {
             path: 'work-sheet',

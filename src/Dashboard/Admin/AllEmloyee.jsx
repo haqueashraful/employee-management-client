@@ -3,6 +3,7 @@ import { Table, Button, Modal, Form, InputNumber, Typography, message, Card, Row
 import Swal from 'sweetalert2';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import CommonTable from '../../Components/CommonTable';
 
 const { Title } = Typography;
 
@@ -171,7 +172,7 @@ const AllEmployee = () => {
         onChange={(checked) => setViewMode(checked ? 'card' : 'table')}
       />
       {viewMode === 'table' ? (
-        <Table dataSource={employees} columns={columns} rowKey="_id" />
+        <CommonTable data={employees} columns={columns} rowKey="_id" />
       ) : (
         <Row gutter={16}>
           {employees.map((employee) => (

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Select, Table, Typography } from "antd";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import CommonTable from "../../Components/CommonTable";
 
 const { Option } = Select;
 const { Title } = Typography;
@@ -82,6 +83,7 @@ const AllWorks = () => {
   };
 
   const columns = [
+    {title: "Sl.No", dataIndex: "index", key: "index"},
     { title: "Employee", dataIndex: "name", key: "name" },
     { title: "Date", dataIndex: "date", key: "date" },
     { title: "Hours Worked", dataIndex: "hours", key: "hours" },
@@ -121,7 +123,7 @@ const AllWorks = () => {
           </Select>
         </div>
       </div>
-      <Table dataSource={workRecords} columns={columns} />
+      <CommonTable data={workRecords} columns={columns} />
       <div>
         <Title level={3}>Total Work Hours: {totalWorkHours}</Title>
       </div>
