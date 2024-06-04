@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useForm } from "react-hook-form";
@@ -7,7 +7,8 @@ import useAxiosPublic from "../Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import SocialLogin from "../Components/SocialLogin";
 import { Select, Button } from "antd";
-import img from '../assets/register (2).svg'
+import img from '../assets/register (2).svg';
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const { Option } = Select;
 
@@ -15,6 +16,7 @@ const Register = () => {
   const { registerUser, profileUpdate } = useAuth();
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
+  const [showPassword, setShowPassword] = useState(false);
 
   const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm();
 
@@ -60,6 +62,10 @@ const Register = () => {
         showConfirmButton: true,
       });
     }
+  };
+
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -113,14 +119,32 @@ const Register = () => {
             {/* Password */}
             <div>
               <label className="block text-lg" htmlFor="password">Password</label>
-              <input
-                {...register("password", { required: true })}
-                type="password"
-                id="password"
-                placeholder="Password"
-                className="w-full p-2 border"
-              />
-              {errors.password && <span className="text-red-600">Password is required</span>}
+              <div className="relative">
+                <input
+                  {...register("password", { 
+                    required: "Password is required",
+                    minLength: {
+                      value: 6,
+                      message: "Password must be at least 6 characters"
+                    },
+                    pattern: {
+                      value: /^(?=.*[A-Z])(?=.*[!@#$%^&*])/,
+                      message: "Password must include a capital letter and a special character"
+                    }
+                  })}
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  placeholder="Password"
+                  className="w-full p-2 border"
+                />
+                <Button 
+                  onClick={toggleShowPassword}
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2"
+                >
+                  {showPassword ? <FaEyeSlash/> : <FaEye/>}
+                </Button>
+              </div>
+              {errors.password && <span className="text-red-600">{errors.password.message}</span>}
             </div>
 
             {/* Bank Account Number */}

@@ -43,7 +43,7 @@ const Nav = () => {
   );
 
   return (
-    <div className="navbar bg-blue-50/50 w-full h-20 flex justify-between items-center">
+    <div className="navbar bg-blue-300/50 w-full h-20 flex justify-between items-center lg:px-28 px-5">
       <div className="flex justify-center items-center gap-1">
         <img className=" size-10" src={logo} alt="logo" />
         <h1 className="text-3xl font-bold">Dev Care</h1>

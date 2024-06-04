@@ -7,13 +7,24 @@ import OurClient from './OurClient';
 const Home = () => {
     return (
         <div>
+
+            {/* slider */}
             <Slider />
+
+
+            {/* Services */}
             <Title title="Services" />
             <Services />
-            <Title title="Testimonial" />
-            <Testimonial />
+
+
+            {/* Our Valuable Client */}
             <Title title="Our Valuable Client" />
             <OurClient />
+
+
+            {/* testimonial */}
+            <Title title="Testimonial" />
+            <Testimonial />
         </div>
     );
 };

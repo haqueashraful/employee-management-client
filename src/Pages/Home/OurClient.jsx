@@ -8,7 +8,7 @@ const OurClient = () => {
     <div className="my-10 -rotate-3">
       <Marquee
         speed={100}
-        className="bg-blue-700/50 py-5 w-full flex flex-col justify-center items-center rounded-md"
+        className="bg-blue-700/50 text-white py-5 w-full flex flex-col justify-center items-center rounded-md"
       >
         <div className=" w-full flex justify-between items-center gap-20">
           <div className="flex justify-center items-center text-4xl">
