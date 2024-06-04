@@ -2,6 +2,7 @@ import Services from './Services';
 import Title from '../../Context/Title';
 import Slider from './Slider';
 import Testimonial from './Testimonial';
+import OurClient from './OurClient';
 
 const Home = () => {
     return (
@@ -11,6 +12,7 @@ const Home = () => {
             <Services />
             <Title title="Testimonial" />
             <Testimonial />
+            <OurClient />
         </div>
     );
 };
