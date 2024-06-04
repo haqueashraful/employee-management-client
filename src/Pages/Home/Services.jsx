@@ -8,7 +8,7 @@ import network from '../../assets/Icons/network_4094475.png'
 
 const Services = () => {
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-10">
 
             {/* web */}
             <Card hoverable className="!text-center border-blue-700">

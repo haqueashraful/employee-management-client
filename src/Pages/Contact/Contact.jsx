@@ -3,6 +3,7 @@ const Contact = () => {
     return (
         <div>
             <img src={img} alt="" />
+
         </div>
     );
 };
