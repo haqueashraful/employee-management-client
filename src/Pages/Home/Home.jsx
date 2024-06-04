@@ -1,9 +1,14 @@
-import React from 'react';
+import Services from './Services';
+import Title from '../../Context/Title';
+import Slider from './Slider';
 
 const Home = () => {
     return (
         <div>
-            This is home
+            <Slider />
+            <Title title="Services" />
+            <Services />
+            
         </div>
     );
 };

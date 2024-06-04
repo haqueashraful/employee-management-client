@@ -1,6 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Rancho&family=Roboto+Slab:wght@100..900&display=swap');
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  font-family: "Roboto Slab", serif;
+}
+
+.carousel .slide img{
+  height: 500px;
+}
+
+.thumbs-wrapper{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.swiper-pagination{
+  position: static !important;
+}
 
 .active {
   color: black;

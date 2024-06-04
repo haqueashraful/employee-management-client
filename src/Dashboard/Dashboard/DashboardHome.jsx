@@ -24,8 +24,6 @@ const DashboardHome = () => {
         {/* user image */}
       <div className="text-center border rounded-lg border-blue-700 p-1">
         <img className="size-72 rounded-lg  hover:rotate-45 hover:transition hover:delay-200 hover:rounded-full" src={photo} alt="" />
-        {/* <h1 className="text-3xl font-bold">{name}</h1> */}
-        {/* <p className="text-xl">Email: <span className="font-bold">{email}</span></p> */}
       </div>
     {/* user details */}
       <div>
