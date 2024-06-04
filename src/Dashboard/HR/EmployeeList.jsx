@@ -6,8 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import PaymentForm from "./PaymentForm"; // Adjust the path as necessary
-import moment from "moment";
+import PaymentForm from "./PaymentForm"; 
 import CommonTable from "../../Components/CommonTable";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);

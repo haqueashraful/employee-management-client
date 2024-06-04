@@ -1,63 +1,107 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
+import { Drawer, Button } from "antd";
+import { MenuOutlined } from "@ant-design/icons";
 import useRole from "../../Hooks/useRole";
 
 const DashboardSide = () => {
-  // const [role] = useRole();
-  const role = "admin";
-  console.log(role);
+  const [role, isLoading] = useRole();
+  const [drawerVisible, setDrawerVisible] = useState(false);
 
-  if (role === "admin") {
-    return (
-      <div className="w-64 bg-blue-700/60 min-h-screen max-h-screen">
-        <h1 className="text-3xl font-bold text-center">Dashboard Side</h1>
-        <ul>
-          <li>
-            <Link to="/dashboard/dash-home">Dash Home</Link>
-          </li>
-          <li>
-            <Link to="/dashboard/all-employee-list">All Users</Link>
-          </li>
-        </ul>
+  const toggleDrawer = () => {
+    setDrawerVisible(!drawerVisible);
+  };
+
+  const renderRoleSpecificNavLinks = () => {
+    if (isLoading) {
+      return <p>Loading...</p>;
+    }
+
+    switch (role) {
+      case "admin":
+        return (
+          <>
+            <li className="bg-white text-blue-700 px-3 py-2 rounded-md">
+              <NavLink to="/dashboard/dash-home">Dash Home</NavLink>
+            </li>
+            <li className="bg-white text-blue-700 px-3 py-2 rounded-md">
+              <NavLink to="/dashboard/all-employee-list">All Users</NavLink>
+            </li>
+          </>
+        );
+      case "hr":
+        return (
+          <>
+            <li className="bg-white text-blue-700 px-3 py-2 rounded-md">
+              <NavLink to="/dashboard/dash-home">Dash Home</NavLink>
+            </li>
+            <li className="bg-white text-blue-700 px-3 py-2 rounded-md">
+              <NavLink to="/dashboard/employee-list">Employee List</NavLink>
+            </li>
+            <li className="bg-white text-blue-700 px-3 py-2 rounded-md">
+              <NavLink to="/dashboard/progress">Progress</NavLink>
+            </li>
+          </>
+        );
+      case "employee":
+        return (
+          <>
+            <li className="bg-white text-blue-700 px-3 py-2 rounded-md">
+              <NavLink to="/dashboard/dash-home">Dash Home</NavLink>
+            </li>
+            <li className="bg-white text-blue-700 px-3 py-2 rounded-md">
+              <NavLink to="/dashboard/work-sheet">Work Sheet</NavLink>
+            </li>
+            <li className="bg-white text-blue-700 px-3 py-2 rounded-md">
+              <NavLink to="/dashboard/payment_history">Payment History</NavLink>
+            </li>
+          </>
+        );
+      default:
+        return null;
+    }
+  };
+
+  const navLinks = (
+    <>
+      {renderRoleSpecificNavLinks()}
+      <li className="bg-white text-blue-700 px-3 py-2 rounded-md">
+        <NavLink to="/">Home</NavLink>
+      </li>
+      <li className="bg-white text-blue-700 px-3 py-2 rounded-md">
+        <NavLink to="/contact">Contact</NavLink>
+      </li>
+    </>
+  );
+
+  return (
+    <div>
+      <div className="sm:hidden">
+        <Button
+          type="primary"
+          icon={<MenuOutlined />}
+          onClick={toggleDrawer}
+          className="m-4"
+        />
+        <Drawer
+          title="Dashboard Side"
+          placement="left"
+          closable={true}
+          onClose={toggleDrawer}
+          visible={drawerVisible}
+          key="left"
+        >
+          <ul className="space-y-4">{navLinks}</ul>
+        </Drawer>
       </div>
-    );
-  }
-  if (role === "hr") {
-    return (
-      <div className="w-64 bg-blue-700/60 min-h-screen">
+      <div className="hidden sm:block w-64 bg-blue-700/60 text-white min-h-screen max-h-screen">
         <h1 className="text-3xl font-bold text-center">Dashboard Side</h1>
-        <ul>
-          <li>
-            <Link to="/dashboard/dash-home">Dash Home</Link>
-          </li>
-          <li>
-            <Link to="/dashboard/employee-list">Employee List</Link>
-          </li>
-          <li>
-            <Link to="/dashboard/progress">Progress</Link>
-          </li>
-        </ul>
+        <div className="px-5 space-y-4">
+          <ul className="space-y-4">{navLinks}</ul>
+        </div>
       </div>
-    );
-  }
-  if (role === "employee") {
-    return (
-      <div className="w-64 bg-blue-700/60 min-h-screen">
-        <h1 className="text-3xl font-bold text-center">Dashboard Side</h1>
-        <ul>
-          <li>
-            <Link to="/dashboard/dash-home">Dash Home</Link>
-          </li>
-          <li>
-            <Link to="/dashboard/work-sheet">Work Sheet</Link>
-          </li>
-          <li>
-            <Link to="/dashboard/payment_history">Payment History</Link>
-          </li>
-        </ul>
-      </div>
-    );
-  }
-  return <p>Loading...</p>;
+    </div>
+  );
 };
 
 export default DashboardSide;

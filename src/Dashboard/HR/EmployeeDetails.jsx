@@ -11,7 +11,7 @@ const EmployeeDetails = () => {
   const { email } = useParams(); 
   const axiosPublic = useAxiosPublic();
 
-  const {data: user} = useQuery({
+  const {data: user, isPending} = useQuery({
     queryKey: ["user", email],
     queryFn: async () => {
       const res = await axiosPublic.get(`/users/${email}`);
@@ -27,7 +27,7 @@ const EmployeeDetails = () => {
     },
   });
 
-  if (isLoading) {
+  if (isPending) {
     return <div>Loading...</div>;
   }
 
@@ -39,7 +39,7 @@ const EmployeeDetails = () => {
 
   return (
     <div>
-      <Title level={2}>{user.name}'s Details</Title>
+      <Title level={2}>{user?.name}'s Details</Title>
       <div className="flex justify-center items-center gap-8">
        <div>
        <img src={user.photo} alt="Employee Photo" style={{ width: 200, height: 200, borderRadius: "10%" }} />

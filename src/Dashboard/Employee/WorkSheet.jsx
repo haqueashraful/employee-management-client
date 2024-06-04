@@ -72,20 +72,14 @@ const WorkSheet = () => {
     },
   ];
 
-  const pageSize = 5; 
-
-  const dataSource = works.map((work, index) => ({
-    ...work,
-    index: index + 1,
-  }));
 
 
   return (
     <div>
       <div className="text-center my-10">
-        <h1 className="text-3xl font-bold">Work Sheet  of {user?.displayName}</h1>
+        <h1 className="text-3xl font-bold my-5">Work Sheet  of {user?.displayName}</h1>
       </div>
-      <form onSubmit={handleSubmit(onSubmit)} className="flex justify-center my-5 gap-14 mb-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex justify-center my-5 gap-4 lg:gap-14 mb-4">
         <Controller
           name="task"
           control={control}
@@ -123,15 +117,9 @@ const WorkSheet = () => {
       </form>
 
       <div>
-        <h1 className="text-center text-3xl text-black">Work data</h1>
+        <h1 className="text-center text-3xl text-black my-5">Work data</h1>
       </div>
       <CommonTable data={works} columns={columns} />
-      {/* <Table
-        dataSource={dataSource}
-        columns={columns}
-        rowKey={(record) => record._id}
-        pagination={{ pageSize: pageSize }}
-      /> */}
     </div>
   );
 };
