@@ -12,6 +12,7 @@ const Home = () => {
             <Services />
             <Title title="Testimonial" />
             <Testimonial />
+            <Title title="Our Valuable Client" />
             <OurClient />
         </div>
     );
