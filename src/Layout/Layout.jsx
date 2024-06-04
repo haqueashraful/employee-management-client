@@ -8,7 +8,7 @@ const Layout = () => {
       <div className="sticky top-0 z-10">
         <Nav />
       </div>
-      <div className="mx-28">
+      <div className="mx-5 lg:mx-28">
         <Outlet />
       </div>
       <Footer />
