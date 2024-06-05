@@ -6,7 +6,7 @@ const AdminRoute = ({children}) => {
     const [isAdmin, isPending] = useAdmin();
     const { user, loader } = useAuth();
     const location = useLocation();
-  
+      console.log(isAdmin)
     if (isPending || loader) {
       return <p> Loading...</p>
     }

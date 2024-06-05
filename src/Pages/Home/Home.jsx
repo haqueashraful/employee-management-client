@@ -4,13 +4,16 @@ import Slider from "./Slider";
 import Testimonial from "./Testimonial";
 import OurClient from "./OurClient";
 import ProjectsSection from "./ProjectsSection";
+import FaqSection from "./FaqSection";
+import Loading from "../../Components/Loading";
+import ReviewSection from "./ReviewSection";
 
 const Home = () => {
   return (
     <div>
       {/* slider */}
       <Slider />
-
+        <Loading />
       {/* Services */}
       <Title title="Services" />
       <Services />
@@ -26,6 +29,14 @@ const Home = () => {
       {/* testimonial */}
       <Title title="Testimonial" />
       <Testimonial />
+
+
+      {/* faq */}
+      <Title title="FAQ" />
+      <FaqSection />
+
+      {/* review */}
+      <ReviewSection />
     </div>
   );
 };

@@ -13,6 +13,8 @@ import AllWorks from '../Dashboard/HR/AllWorks';
 import AllEmployee from '../Dashboard/Admin/AllEmloyee';
 import DashboardHome from '../Dashboard/Dashboard/DashboardHome';
 import PrivateRoute from './PrivateRoute';
+import AdminRoute from './AdminRoute';
+import HrRoute from './HrRoute';
 
 const Routes = createBrowserRouter([
     {
@@ -58,21 +60,21 @@ const Routes = createBrowserRouter([
         // HR
         {
             path: 'employee-list',
-            element: <EmployeeList />
+            element: <HrRoute><EmployeeList /></HrRoute>
         },
         {
             path: 'employee/:email',
-            element: <EmployeeDetails />
+            element: <HrRoute><EmployeeDetails /></HrRoute>
         },
         {
             path: 'progress',
-            element: <AllWorks />
+            element: <HrRoute> <AllWorks /></HrRoute>
         },
 
         // admin
         {
             path: 'all-employee-list',
-            element: <AllEmployee />
+            element: <AdminRoute><AllEmployee /></AdminRoute>
         }
     ]
    }
