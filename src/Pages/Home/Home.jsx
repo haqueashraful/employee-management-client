@@ -1,32 +1,33 @@
-import Services from './Services';
-import Title from '../../Context/Title';
-import Slider from './Slider';
-import Testimonial from './Testimonial';
-import OurClient from './OurClient';
+import Services from "./Services";
+import Title from "../../Context/Title";
+import Slider from "./Slider";
+import Testimonial from "./Testimonial";
+import OurClient from "./OurClient";
+import ProjectsSection from "./ProjectsSection";
 
 const Home = () => {
-    return (
-        <div>
+  return (
+    <div>
+      {/* slider */}
+      <Slider />
 
-            {/* slider */}
-            <Slider />
+      {/* Services */}
+      <Title title="Services" />
+      <Services />
 
+      {/* projects */}
+      <Title title="Our Projects" />
+      <ProjectsSection />
 
-            {/* Services */}
-            <Title title="Services" />
-            <Services />
+      {/* Our Valuable Client */}
+      <Title title="Our Valuable Client" />
+      <OurClient />
 
-
-            {/* Our Valuable Client */}
-            <Title title="Our Valuable Client" />
-            <OurClient />
-
-
-            {/* testimonial */}
-            <Title title="Testimonial" />
-            <Testimonial />
-        </div>
-    );
+      {/* testimonial */}
+      <Title title="Testimonial" />
+      <Testimonial />
+    </div>
+  );
 };
 
 export default Home;
