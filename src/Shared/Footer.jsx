@@ -38,13 +38,19 @@ const Footer = () => {
           <p className="text-2xl font-bold">Connect in Social</p>
           <ul className="flex items-center gap-5 py-3">
             <li className=" p-2 rounded-full text-2xl flex justify-center items-center bg-white text-blue-700">
+              <Link to="https://github.com/haqueashraful">
               <FaGithub />
+              </Link>
             </li>
             <li className=" p-2 rounded-full text-2xl flex justify-center items-center bg-white text-blue-700">
+              <Link to="https://www.facebook.com/profile.php?id=100051858772605">
               <FaFacebook />
+              </Link>
             </li>
             <li className=" p-2 rounded-full text-2xl flex justify-center items-center bg-white text-blue-700">
+              <Link to="https://www.linkedin.com/in/a-h-rana">
               <FaLinkedinIn />
+              </Link>
             </li>
           </ul>
         </div>
