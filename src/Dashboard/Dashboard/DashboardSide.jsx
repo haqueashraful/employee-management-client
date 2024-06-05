@@ -41,6 +41,9 @@ const DashboardSide = () => {
             <li className="bg-white text-blue-700 px-3 py-2 rounded-md">
               <NavLink to="/dashboard/progress">Progress</NavLink>
             </li>
+            <li className="bg-white text-blue-700 px-3 py-2 rounded-md">
+              <NavLink to="/dashboard/all-contact">All Contracts</NavLink>
+            </li>
           </>
         );
       case "employee":

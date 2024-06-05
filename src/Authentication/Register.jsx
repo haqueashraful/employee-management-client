@@ -137,12 +137,12 @@ const Register = () => {
                   placeholder="Password"
                   className="w-full p-2 border"
                 />
-                <Button 
+                <span
                   onClick={toggleShowPassword}
                   className="absolute right-2 top-1/2 transform -translate-y-1/2"
                 >
                   {showPassword ? <FaEyeSlash/> : <FaEye/>}
-                </Button>
+                </span>
               </div>
               {errors.password && <span className="text-red-600">{errors.password.message}</span>}
             </div>

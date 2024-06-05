@@ -15,6 +15,7 @@ import DashboardHome from '../Dashboard/Dashboard/DashboardHome';
 import PrivateRoute from './PrivateRoute';
 import AdminRoute from './AdminRoute';
 import HrRoute from './HrRoute';
+import AllContact from '../Dashboard/HR/AllContact';
 
 const Routes = createBrowserRouter([
     {
@@ -69,6 +70,10 @@ const Routes = createBrowserRouter([
         {
             path: 'progress',
             element: <HrRoute> <AllWorks /></HrRoute>
+        },
+        {
+            path: 'all-contact',
+            element: <HrRoute><AllContact /></HrRoute>
         },
 
         // admin
