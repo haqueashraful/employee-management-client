@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import Loading from "../../Components/Loading";
 
 const { Title } = Typography;
 
@@ -28,7 +29,7 @@ const EmployeeDetails = () => {
   });
 
   if (isPending) {
-    return <div>Loading...</div>;
+    return <Loading />
   }
 
   if (error || !employee) {

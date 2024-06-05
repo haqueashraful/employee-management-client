@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { Drawer, Button } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
 import useRole from "../../Hooks/useRole";
+import Loading from "../../Components/Loading";
 
 const DashboardSide = () => {
   const [role, isLoading] = useRole();
@@ -14,7 +15,7 @@ const DashboardSide = () => {
 
   const renderRoleSpecificNavLinks = () => {
     if (isLoading) {
-      return <p>Loading...</p>;
+      return <Loading />;
     }
 
     switch (role) {

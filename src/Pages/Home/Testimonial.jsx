@@ -2,16 +2,21 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { Carousel, Rate } from "antd";
 import Title from "antd/es/typography/Title";
+import Loading from "../../Components/Loading";
 
 const Testimonial = () => {
     const axiosPublic = useAxiosPublic();
-    const {data : reviews = []} = useQuery({
+    const {data : reviews = [], isLoading} = useQuery({
         queryKey: ["reviews"],
         queryFn: async () => {
             const res = await axiosPublic.get("/reviews");
             return res.data;
         }
     })
+
+    if(isLoading){
+        return <Loading />
+    }
     return (
         <div className="my-10">
             <Carousel autoplay>

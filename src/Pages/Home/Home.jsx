@@ -36,6 +36,7 @@ const Home = () => {
       <FaqSection />
 
       {/* review */}
+      <Title title="Give Feedback" />
       <ReviewSection />
     </div>
   );

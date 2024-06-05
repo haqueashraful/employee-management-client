@@ -3,6 +3,7 @@ import useAuth from "../../Hooks/useAuth";
 import useUser from "../../Hooks/useUser";
 import { Modal, Input, Button, Form } from 'antd';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import Loading from '../../Components/Loading';
 
 const DashboardHome = () => {
   const { user } = useAuth();
@@ -49,7 +50,7 @@ const DashboardHome = () => {
   };
 
   if (isPending) {
-    return <p>Loading...</p>;
+    return <Loading />
   }
 
   return (

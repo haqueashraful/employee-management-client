@@ -1,6 +1,7 @@
 import { Navigate, useLocation } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
 import useAdmin from "../Hooks/useAdmin";
+import Loading from "../Components/Loading";
 
 const AdminRoute = ({children}) => {
     const [isAdmin, isPending] = useAdmin();
@@ -8,7 +9,7 @@ const AdminRoute = ({children}) => {
     const location = useLocation();
       console.log(isAdmin)
     if (isPending || loader) {
-      return <p> Loading...</p>
+      return <Loading />
     }
   
     if (isAdmin && user) {

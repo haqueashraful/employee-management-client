@@ -1,6 +1,7 @@
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import useRole from "../Hooks/useRole";
 import useAuth from "../Hooks/useAuth";
+import Loading from "../Components/Loading";
 
 const HrRoute = ({children}) => {
     const [role , isLoading] = useRole();
@@ -8,7 +9,7 @@ const HrRoute = ({children}) => {
     const {user} = useAuth();
 
     if(isLoading){
-        return <p>Loading...</p>
+        return <Loading />
     }
 
     if(role === "hr" && user){

@@ -76,10 +76,11 @@ export const MyContext = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
-      const email = currentUser.email;
+    if(currentUser){
+      const email = currentUser && currentUser.email;
       // Check if the user is fired
       const firedResponse = await axiosPublic.get(`/users/fired/${email}`);
-      const isFired = firedResponse.data.isFired;
+      const isFired = await firedResponse.data.isFired;
       if (isFired) {
         setUser(null);
         await logOutUser();
@@ -93,11 +94,13 @@ export const MyContext = ({ children }) => {
         });
         return;
       }
+    }
 
 
       if (currentUser) {
         axiosPublic.post("/jwt", { email : currentUser?.email})
           .then((response) => {
+            setUser(currentUser);
             console.log(response.data.token);
           })
           .catch((error) => {

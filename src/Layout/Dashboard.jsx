@@ -1,7 +1,14 @@
 import { Outlet } from "react-router-dom";
 import DashboardSide from "../Dashboard/Dashboard/DashboardSide";
+import useRole from "../Hooks/useRole";
+import Loading from "../Components/Loading";
 
 const Dashboard = () => {
+  const [role, isPending] = useRole();
+  if(isPending){
+    return <Loading />
+  }
+  
   return (
     <div className=" flex container mx-auto">
       <div className="w-64 fixed">

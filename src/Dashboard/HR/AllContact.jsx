@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { Card, List, Spin } from "antd";
+import Loading from "../../Components/Loading";
 
 const AllContact = () => {
     const axiosSecure = useAxiosSecure();
@@ -14,7 +15,7 @@ const AllContact = () => {
     });
 
     if (isLoading) {
-        return <div className="flex justify-center items-center h-full"><Spin size="large" /></div>;
+        return <Loading />
     }
 
     return (

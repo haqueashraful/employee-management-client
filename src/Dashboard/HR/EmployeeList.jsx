@@ -8,6 +8,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import PaymentForm from "./PaymentForm"; 
 import CommonTable from "../../Components/CommonTable";
+import Loading from "../../Components/Loading";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
@@ -108,7 +109,7 @@ const EmployeeList = () => {
   ];
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading />
   }
 
   if (error) {
