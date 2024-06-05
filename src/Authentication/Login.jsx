@@ -6,7 +6,7 @@ import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import useAuth from "../Hooks/useAuth";
 import SocialLogin from "../Components/SocialLogin";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
-import img from '../assets/login (2).svg'
+import img from '../assets/login.svg'
 
 const Login = () => {
   const { logInUser, setLoader } = useAuth();

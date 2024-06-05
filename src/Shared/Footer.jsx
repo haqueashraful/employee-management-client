@@ -6,7 +6,7 @@ import { FaFacebook, FaGithub, FaLinkedinIn } from "react-icons/fa";
 const Footer = () => {
   return (
     <div>
-      <Marquee className="bg-green-700/50 py-5">
+      <Marquee speed={200} className="bg-green-700/50 py-5">
         <p className="text-center text-white font-bold text-5xl">
           #Contact With Us Today
         </p>

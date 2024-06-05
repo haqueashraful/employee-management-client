@@ -3,7 +3,7 @@ import DashboardSide from "../Dashboard/Dashboard/DashboardSide";
 
 const Dashboard = () => {
   return (
-    <div className=" flex">
+    <div className=" flex container mx-auto">
       <div className="w-64 fixed">
       <DashboardSide />
       </div>

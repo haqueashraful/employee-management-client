@@ -45,28 +45,43 @@ const Nav = () => {
 
   const dropdownMenu = (
     <Menu>
-      <Menu.Item key="home">
-        <NavLink to="/">
-          <Button type="link" className="!border-none">Home</Button>
-        </NavLink>
-      </Menu.Item>
-      <Menu.Item key="contact">
-        <NavLink to="/contact">
-          <Button type="link" className="!border-none">Contact</Button>
-        </NavLink>
-      </Menu.Item>
-      <Menu.Item key="dashboard">
-        <NavLink to="/dashboard/dash-home">
-          <Button type="link" className="!border-none">Dashboard</Button>
-        </NavLink>
-      </Menu.Item>
       {user ? (
         <>
           <Menu.Divider />
-          <p className="text-center text-xl">Profile</p>
           <Menu.Item key="username">
-            <><img className="w-full h-20 rounded-md" src={user?.photoURL} alt="" /><p className="text-center text-xl">{user?.displayName}</p></>
+            <>
+              <img
+                className="w-full h-20 rounded-md"
+                src={user?.photoURL}
+                alt=""
+              />
+              <p className="text-center text-xl">{user?.displayName}</p>
+            </>
           </Menu.Item>
+          {/* menu */}
+          <Menu.Item key="home">
+            <NavLink to="/">
+              <Button type="link" className="!border-none">
+                Home
+              </Button>
+            </NavLink>
+          </Menu.Item>
+          <Menu.Item key="contact">
+            <NavLink to="/contact">
+              <Button type="link" className="!border-none">
+                Contact
+              </Button>
+            </NavLink>
+          </Menu.Item>
+          <Menu.Item key="dashboard">
+            <NavLink to="/dashboard/dash-home">
+              <Button type="link" className="!border-none">
+                Dashboard
+              </Button>
+            </NavLink>
+          </Menu.Item>
+
+          {/* logout */}
           <Menu.Item key="logout">
             <Button type="link" onClick={logout}>
               Log out
@@ -74,11 +89,35 @@ const Nav = () => {
           </Menu.Item>
         </>
       ) : (
-        <Menu.Item key="login">
-          <NavLink to="/login">
-            <Button type="primary">Log in</Button>
-          </NavLink>
-        </Menu.Item>
+        <>
+          {" "}
+          <Menu.Item key="home">
+            <NavLink to="/">
+              <Button type="link" className="!border-none">
+                Home
+              </Button>
+            </NavLink>
+          </Menu.Item>
+          <Menu.Item key="contact">
+            <NavLink to="/contact">
+              <Button type="link" className="!border-none">
+                Contact
+              </Button>
+            </NavLink>
+          </Menu.Item>
+          <Menu.Item key="dashboard">
+            <NavLink to="/dashboard/dash-home">
+              <Button type="link" className="!border-none">
+                Dashboard
+              </Button>
+            </NavLink>
+          </Menu.Item>
+          <Menu.Item key="login">
+            <NavLink to="/login">
+              <Button type="primary">Log in</Button>
+            </NavLink>
+          </Menu.Item>
+        </>
       )}
     </Menu>
   );
@@ -127,7 +166,12 @@ const Nav = () => {
       </div>
       <div className="md:hidden flex items-center">
         <Dropdown overlay={dropdownMenu} trigger={["click"]}>
-          <Button type="text" shape="circle" className="!text-blue-700" icon={<MenuOutlined />} />
+          <Button
+            type="text"
+            shape="circle"
+            className="!text-blue-700"
+            icon={<MenuOutlined />}
+          />
         </Dropdown>
       </div>
     </div>

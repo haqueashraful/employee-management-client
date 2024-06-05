@@ -7,7 +7,7 @@ import useAxiosPublic from "../Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import SocialLogin from "../Components/SocialLogin";
 import { Select, Button } from "antd";
-import img from '../assets/register (2).svg';
+import img from '../assets/register.svg';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const { Option } = Select;

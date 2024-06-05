@@ -12,6 +12,7 @@ import EmployeeDetails from '../Dashboard/HR/EmployeeDetails';
 import AllWorks from '../Dashboard/HR/AllWorks';
 import AllEmployee from '../Dashboard/Admin/AllEmloyee';
 import DashboardHome from '../Dashboard/Dashboard/DashboardHome';
+import PrivateRoute from './PrivateRoute';
 
 const Routes = createBrowserRouter([
     {
@@ -38,7 +39,7 @@ const Routes = createBrowserRouter([
     },
    {
     path: '/dashboard',
-    element: <Dashboard />,
+    element: <PrivateRoute><Dashboard /></PrivateRoute>,
     children: [
         {
             path: 'dash-home',

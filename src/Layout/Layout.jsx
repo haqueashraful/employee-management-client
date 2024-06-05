@@ -4,7 +4,7 @@ import Footer from "../Shared/Footer";
 
 const Layout = () => {
   return (
-    <div className="relative">
+    <div className="relative container mx-auto">
       <div className="sticky top-0 z-10">
         <Nav />
       </div>

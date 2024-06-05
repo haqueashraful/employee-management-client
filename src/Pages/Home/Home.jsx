@@ -15,13 +15,13 @@ const Home = () => {
       <Title title="Services" />
       <Services />
 
-      {/* projects */}
-      <Title title="Our Projects" />
-      <ProjectsSection />
-
       {/* Our Valuable Client */}
       <Title title="Our Valuable Client" />
       <OurClient />
+
+      {/* projects */}
+      <Title title="Our Projects" />
+      <ProjectsSection />
 
       {/* testimonial */}
       <Title title="Testimonial" />
