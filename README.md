@@ -7,13 +7,18 @@ A complete _**Employee Management**_ System which is build on _**ReactJs**_ .
 > Admin Pass : ```Rana$Rana```
 
 
-> Run the file
+> Make Ready for Run: 
+``` Install dependencies
+npm install
+```
+
+> Run the file :
 ```Run the file
  npm run dev 
 ```
 
 > ## Key Features
---------------------
+ --------------------
 1. `Payment integrate` For pay Employees salary 
 2. `Authentication` Implement with `Firebase` and `BackEnd`.  
 3.  Dashboard system separate for `Admin` , `User` and `Employee`.
@@ -25,4 +30,6 @@ A complete _**Employee Management**_ System which is build on _**ReactJs**_ .
 9. `Fired Employee` Cannot Login with same email.
 10. Admin `adjust salary` for employee.
 11. Admin Can `Make Hr`.
+
+
 
