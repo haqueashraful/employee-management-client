@@ -91,6 +91,7 @@ const EmployeeList = () => {
       key: "pay",
       render: (_, record) => (
         <Button
+        className="!bg-blue-700/50 !text-white"
           type="primary"
           onClick={() => handlePay(record)}
           disabled={!record.isVerified}

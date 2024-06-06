@@ -13,7 +13,7 @@ const DashboardSide = () => {
     setDrawerVisible(!drawerVisible);
   };
 
-  const renderRoleSpecificNavLinks = () => {
+  const roleSpecificNavLinks = () => {
     if (isLoading) {
       return <Loading />;
     }
@@ -68,7 +68,7 @@ const DashboardSide = () => {
 
   const navLinks = (
     <>
-      {renderRoleSpecificNavLinks()}
+      {roleSpecificNavLinks()}
       <li className="bg-white text-blue-700 px-3 py-2 rounded-md">
         <NavLink to="/">Home</NavLink>
       </li>
@@ -82,10 +82,11 @@ const DashboardSide = () => {
     <div>
       <div className="sm:hidden">
         <Button
+
           type="primary"
           icon={<MenuOutlined />}
           onClick={toggleDrawer}
-          className="m-4"
+          className="m-4 !bg-blue-700/50 !text-white"
         />
         <Drawer
           title="Dashboard Side"

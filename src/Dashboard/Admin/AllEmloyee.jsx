@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import CommonTable from '../../Components/CommonTable';
-import Proptype from "prop-types"
+import PropTypes from "prop-types"
 
 const { Title } = Typography;
 
@@ -73,6 +73,17 @@ const AllEmployee = () => {
     }
   };
 
+  const handleVerifyHR = async (employee) => {
+    try {
+      await axiosSecure.patch(`/users/${employee.email}`, { isVerified: true });
+      message.success(`${employee.name} has been verified.`);
+      refetch();
+    } catch (error) {
+      console.error('Error verifying HR:', error);
+      message.error('Error verifying HR.');
+    }
+  };
+
   const handleSalaryAdjustment = (employee) => {
     setSelectedEmployee(employee);
     setIsModalVisible(true);
@@ -80,7 +91,6 @@ const AllEmployee = () => {
   };
 
   const handleSalary = async (values) => {
-    console.log(values)
     try {
       await axiosSecure.patch(`/users/${selectedEmployee.email}`, { salary: values.salary });
       message.success(`${selectedEmployee.name}'s salary has been updated.`);
@@ -99,7 +109,7 @@ const AllEmployee = () => {
       key: 'name'
     },
     {
-      title: "image",
+      title: "Image",
       key: "photo",
       render: (text, record) => (
         <img src={record.photo} alt={record.name} className="h-10 w-10 rounded-full" />
@@ -113,17 +123,27 @@ const AllEmployee = () => {
       )
     },
     {
-      title: 'Make HR',
-      key: 'makeHR',
-      render: (text, record) => (
-        record.role !== 'hr' && record.role !== 'admin' ? <Button onClick={() => handleMakeHR(record)}>Make HR</Button> : <p className='uppercase'>{record.role}</p>
-      )
+      title: 'Role Action',
+      key: 'roleAction',
+      render: (text, record) => {
+        if (record.role === 'admin') {
+          return <p>Admin</p>;
+        } else if (record.role === 'hr') {
+          return (
+            <Button onClick={() => handleVerifyHR(record)}>Verify</Button>
+          );
+        } else {
+          return (
+            <Button onClick={() => handleMakeHR(record)}>Make HR</Button>
+          );
+        }
+      }
     },
     {
       title: 'Fire',
       key: 'fire',
       render: (text, record) => (
-        record.isFired ? 'Fired' : record.role !== 'admin' ? <Button danger onClick={() => handleFire(record)}>Fire</Button> : <p>😂😂</p>
+        record.isFired ? 'Fired' : record.role !== 'admin' ? <Button danger onClick={() => handleFire(record)}>Fire</Button> : <p>Powerful User</p>
       )
     },
     {
@@ -144,16 +164,20 @@ const AllEmployee = () => {
         </div>
         <p>Designation: {employee.designation ? employee.designation : 'N/A'}</p>
         <p>
-          {employee.role !== 'hr' && employee.role !== 'admin' ? (
+          {employee.role === 'admin' ? (
+            <p>Role: Admin</p>
+          ) : employee.role === 'hr' ? (
+            <Button onClick={() => handleVerifyHR(employee)}>Verify</Button>
+          ) : (
             <Button onClick={() => handleMakeHR(employee)}>Make HR</Button>
-          ) : <p> Role: <span className='uppercase'>{employee.role}</span></p>}
+          )}
         </p>
         <div className='flex justify-between gap-4'>
           <p>
             {employee.isFired ? (
               'Fired'
             ) : (
-              employee.role !== 'admin' ? <Button danger onClick={() => handleFire(employee)}>Fire</Button> : <p> 😂😂</p>
+              employee.role !== 'admin' ? <Button danger onClick={() => handleFire(employee)}>Fire</Button> : <p>Powerful User</p>
             )}
           </p>
           <p>
@@ -200,7 +224,7 @@ const AllEmployee = () => {
             name="salary"
             rules={[{ required: true, message: 'Please input the salary!' }]}
           >
-            <input type="number" className='p-1  border focus:outline-none' min={selectedEmployee ? selectedEmployee.salary : 0} />
+            <input type="number" className='p-1 border focus:outline-none' min={selectedEmployee ? selectedEmployee.salary : 0} />
           </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit">
@@ -213,8 +237,6 @@ const AllEmployee = () => {
   );
 };
 
-AllEmployee.prototype={
-
-}
+AllEmployee.propTypes = {};
 
 export default AllEmployee;

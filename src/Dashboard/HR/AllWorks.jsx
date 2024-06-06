@@ -91,9 +91,9 @@ const AllWorks = () => {
 
   return (
     <div>
-      <div className="flex justify-between">
+      <div className="flex lg:flex-row flex-col justify-between">
         <div className="flex items-center">
-          <Title level={3}>Filter by Employee:</Title>
+          <Title className=" !text-base lg:!text-xl">Filter by Employee:</Title>
           <Select
             defaultValue="All Employees"
             style={{ width: 200 }}
@@ -108,7 +108,7 @@ const AllWorks = () => {
           </Select>
         </div>
         <div className="flex items-center">
-          <Title level={3}>Filter by Month:</Title>
+          <Title className=" !text-base lg:!text-xl">Filter by Month:</Title>
           <Select
             defaultValue="All Months"
             style={{ width: 200 }}

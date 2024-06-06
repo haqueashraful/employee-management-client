@@ -97,7 +97,7 @@ const Contact = () => {
               name="message"
               rows="5"
             ></textarea>
-            <button className="w-full p-2 bg-blue-500 text-white">Submit</button>
+            <button className="w-full p-2 bg-blue-500/50 text-white">Submit</button>
           </form>
         </Card>
         <Card hoverable className="!border-blue-700/50">

@@ -39,6 +39,8 @@ const Register = () => {
         name: data.name,
         email: data.email,
         bank_account_no: data.bankAccountNo,
+        salary: data.salary,
+        role: data.role,
         designation: data.designation,
         photo: imageUrl,
       })
@@ -159,6 +161,34 @@ const Register = () => {
               {errors.bankAccountNo && <span className="text-red-600">Bank Account Number is required</span>}
             </div>
 
+            {/* salary */}
+            <div>
+              <label className="block text-lg" htmlFor="salary">Salary</label>
+              <input
+                {...register("salary", { required: true })}
+                id="salary"
+                placeholder="Salary"
+                className="w-full p-2 border"
+              />
+              {errors.salary && <span className="text-red-600">Salary is required</span>}
+            </div>
+
+            {/* role */}
+            <div>
+              <label className="block text-lg" htmlFor="role">Role</label>
+              <Select
+                value={watch("role")}
+                onChange={(value) => setValue("role", value)}
+                id="role"
+                placeholder="Select Role"
+                className="w-full"
+              >
+                <Option value="admin">Employee</Option>
+                <Option value="user">HR</Option>
+              </Select>
+              {errors.role && <span className="text-red-600">Role is required</span>}
+            </div>
+
             {/* Designation */}
             <div>
               <label className="block text-lg" htmlFor="designation">Designation</label>
@@ -178,7 +208,7 @@ const Register = () => {
             </div>
 
             <div className="text-center">
-              <Button type="primary" htmlType="submit">Register</Button>
+              <Button className="!bg-blue-700/50 !text-white" type="primary" htmlType="submit">Register</Button>
             </div>
           </form>
           <p className="text-center">

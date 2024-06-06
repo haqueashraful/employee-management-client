@@ -8,7 +8,7 @@ import Loading from '../../Components/Loading';
 const DashboardHome = () => {
   const { user } = useAuth();
   const [userData, refetch, isPending] = useUser();
-  const { name, email, role, photo, bank_account_no, designation } = userData || {};
+  const { name, email, role, photo, bank_account_no, designation, salary } = userData || {};
   const axiosSecure = useAxiosSecure();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [missingFields, setMissingFields] = useState([]);
@@ -67,20 +67,23 @@ const DashboardHome = () => {
           <div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div>
-                <p className="text-xl font-bold">Name: <span className="font-bold">{name}</span></p>
+                <p className="text-lg lg:text-xl font-bold">Name: <span className=" text-lg lg:text-xl font-normal">{name}</span></p>
               </div>
 
               <div>
-                <p className="text-xl font-bold">Email: <span className="font-bold">{email}</span></p>
+                <p className="text-lg lg:text-xl font-bold">Email: <span className=" text-lg lg:text-xl font-normal">{email}</span></p>
               </div>
               <div>
-                <p className="text-xl font-bold">Role: <span className="font-bold">{role}</span></p>
+                <p className="text-lg lg:text-xl font-bold">Role: <span className=" text-lg lg:text-xl font-normal">{role}</span></p>
               </div>
               <div>
-                <p className="text-xl font-bold">Bank Account No: <span className="font-bold">{bank_account_no}</span></p>
+                <p className="text-lg lg:text-xl font-bold">Bank Account No: <span className=" text-lg lg:text-xl font-normal">{bank_account_no}</span></p>
               </div>
               <div>
-                <p className="text-xl font-bold">Designation: <span className="font-bold">{designation}</span></p>
+                <p className="text-lg lg:text-xl font-bold">Designation: <span className=" text-lg lg:text-xl font-normal">{designation}</span></p>
+              </div>
+              <div>
+                <p className="text-lg lg:text-xl font-bold">Salary: <span className=" text-lg lg:text-xl font-normal">{salary} <span className=' text-blue-700'>$</span></span></p>
               </div>
             </div>
           </div>
@@ -111,7 +114,7 @@ const DashboardHome = () => {
             </Form.Item>
           )}
           <Form.Item>
-            <Button type="primary" htmlType="submit">
+            <Button className=' !bg-blue-700/50' type="primary" htmlType="submit">
               Submit
             </Button>
           </Form.Item>

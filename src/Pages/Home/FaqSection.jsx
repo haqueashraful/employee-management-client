@@ -51,7 +51,7 @@ const FaqSection = () => {
         <img className="w-full h-full object-cover" src={img} alt="FAQ" />
       </div>
       <div className="w-full lg:w-1/2 p-5">
-        <Collapse items={items} />
+        <Collapse className=" !border-blue-700/50" items={items} />
       </div>
     </div>
   );

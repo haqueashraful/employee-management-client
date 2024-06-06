@@ -145,7 +145,7 @@ const PaymentForm = ({ salary, selectedEmployee, paymentMonth, paymentYear, hand
           }}
         />
         <p className="text-red-500">{error}</p>
-        <button type="submit" disabled={!stripe || !clientSecret} className="border-b-4 text-[#BB8506] border-[#BB8506] rounded-md px-5 py-2 hover:bg-black font-semibold">
+        <button type="submit" disabled={!stripe || !clientSecret} className="border-b-4 text-white border-blue-700/50 rounded-md px-5 py-2 hover:bg-blue-700 font-semibold">
           Pay
         </button>
       </form>

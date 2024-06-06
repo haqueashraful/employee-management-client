@@ -52,7 +52,6 @@ const ReviewSection = () => {
 
     return (
         <div className="p-5 bg-white rounded-md shadow-md my-10">
-            <h2 className="text-2xl text-center font-bold mb-4">Leave a Review</h2>
            <div className="flex lg:flex-row flex-col justify-center items-center gap-4">
             {/* image */}
                 <div className="w-full lg:w-1/2 h-1/2 overflow-hidden">
@@ -60,6 +59,7 @@ const ReviewSection = () => {
                 </div>
             {/* Form */}
            <form className="w-full lg:w-1/2" onSubmit={handleSubmit}>
+                       <h2 className="text-2xl text-center font-bold mb-4">Leave a Review</h2>
                 <div className="mb-4">
                     <label className="block text-sm font-bold mb-2">Rating</label>
                     <Rate value={rating} onChange={setRating} />
@@ -84,7 +84,7 @@ const ReviewSection = () => {
                     />
                 </div>
                 <div>
-                    <Button type="primary" htmlType="submit" loading={loading}>
+                    <Button className=" !bg-blue-700/50 !text-white" type="primary" htmlType="submit" loading={loading}>
                         Submit
                     </Button>
                 </div>

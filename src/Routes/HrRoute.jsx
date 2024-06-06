@@ -7,6 +7,7 @@ const HrRoute = ({children}) => {
     const [role , isLoading] = useRole();
     const location = useLocation();
     const {user} = useAuth();
+    console.log(role)
 
     if(isLoading){
         return <Loading />

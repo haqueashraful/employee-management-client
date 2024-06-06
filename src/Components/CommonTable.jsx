@@ -9,7 +9,7 @@ const CommonTable = ({ data, columns }) => {
   }));
 
   return (
-    <div>
+    <div className=" overflow-x-auto">
       <Table
         dataSource={dataSource}
         columns={columns}

@@ -111,7 +111,7 @@ const WorkSheet = () => {
             <DatePicker {...field} defaultValue={moment()} className="w-40" />
           )}
         />
-        <Button type="primary" htmlType="submit">
+        <Button className=" !bg-blue-700/50 !text-white" type="primary" htmlType="submit">
           Submit
         </Button>
       </form>
