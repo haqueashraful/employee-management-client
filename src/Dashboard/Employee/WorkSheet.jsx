@@ -20,7 +20,11 @@ const WorkSheet = () => {
     },
   });
 
-  const { data: works = [], isLoading, refetch } = useQuery({
+  const {
+    data: works = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["works", user?.email],
     queryFn: async () => {
       const res = await axiosPublic.get(`/works/${user?.email}`);
@@ -36,8 +40,8 @@ const WorkSheet = () => {
     };
 
     try {
-      await axiosPublic.post("/works", {...newEntry, name : user.displayName})
-      refetch();      
+      await axiosPublic.post("/works", { ...newEntry, name: user.displayName });
+      refetch();
       reset({
         task: "Sales",
         hours: "",
@@ -72,14 +76,17 @@ const WorkSheet = () => {
     },
   ];
 
-
-
   return (
     <div>
       <div className="text-center my-10">
-        <h1 className="text-3xl font-bold my-5">Work Sheet  of {user?.displayName}</h1>
+        <h1 className="text-3xl font-bold my-5">
+          Work Sheet of {user?.displayName}
+        </h1>
       </div>
-      <form onSubmit={handleSubmit(onSubmit)} className="flex justify-center my-5 gap-4 lg:gap-14 mb-4">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex justify-center my-5 gap-4 lg:gap-14 mb-4"
+      >
         <Controller
           name="task"
           control={control}
@@ -111,7 +118,11 @@ const WorkSheet = () => {
             <DatePicker {...field} defaultValue={moment()} className="w-40" />
           )}
         />
-        <Button className=" !bg-blue-700/50 !text-white" type="primary" htmlType="submit">
+        <Button
+          className=" !bg-blue-700/50 !text-white"
+          type="primary"
+          htmlType="submit"
+        >
           Submit
         </Button>
       </form>
@@ -119,7 +130,9 @@ const WorkSheet = () => {
       <div>
         <h1 className="text-center text-3xl text-black my-5">Work data</h1>
       </div>
-      <CommonTable data={works} columns={columns} />
+      <div className="overflow-x-auto">
+        <CommonTable data={works} columns={columns} />
+      </div>
     </div>
   );
 };

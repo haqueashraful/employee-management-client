@@ -9,45 +9,45 @@ const DashboardHome = () => {
   const { user } = useAuth();
   const [userData, refetch, isPending] = useUser();
   const { name, email, role, photo, bank_account_no, designation, salary } = userData || {};
-  const axiosSecure = useAxiosSecure();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [missingFields, setMissingFields] = useState([]);
-  const [form] = Form.useForm();
+  // const axiosSecure = useAxiosSecure();
+  // const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [missingFields, setMissingFields] = useState([]);
+  // const [form] = Form.useForm();
 
-  useEffect(() => {
-    const checkMissingFields = () => {
-      const fields = [
-        { key: 'role', value: role, label: 'Role' },
-        { key: 'bank_account_no', value: bank_account_no, label: 'Bank Account No' },
-        { key: 'designation', value: designation, label: 'Designation' }
-      ];
-      const missing = fields.filter(field => !field.value).map(field => field.label);
-      setMissingFields(missing);
-      if (missing.length > 0) {
-        setIsModalOpen(true);
-      }
-    };
+  // useEffect(() => {
+  //   const checkMissingFields = () => {
+  //     const fields = [
+  //       { key: 'role', value: role, label: 'Role' },
+  //       { key: 'bank_account_no', value: bank_account_no, label: 'Bank Account No' },
+  //       { key: 'designation', value: designation, label: 'Designation' }
+  //     ];
+  //     const missing = fields.filter(field => !field.value).map(field => field.label);
+  //     setMissingFields(missing);
+  //     if (missing.length > 0) {
+  //       setIsModalOpen(true);
+  //     }
+  //   };
 
-    if (userData) {
-      checkMissingFields();
-    }
-  }, [userData]);
+  //   if (userData) {
+  //     checkMissingFields();
+  //   }
+  // }, [userData]);
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
+  // const handleCloseModal = () => {
+  //   setIsModalOpen(false);
+  // };
 
-  const handleFormSubmit = (values) => {
+  // const handleFormSubmit = (values) => {
 
-    axiosSecure.patch(`/users/${email}`, values)
-      .then(() => {
-        refetch(); 
-        handleCloseModal();
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
+  //   axiosSecure.patch(`/users/${email}`, values)
+  //     .then(() => {
+  //       refetch(); 
+  //       handleCloseModal();
+  //     })
+  //     .catch(error => {
+  //       console.log(error);
+  //     });
+  // };
 
   if (isPending) {
     return <Loading />

@@ -80,7 +80,7 @@ const DashboardSide = () => {
 
   return (
     <div>
-      <div className="sm:hidden">
+      <div className="lg:hidden">
         <Button
 
           type="primary"
@@ -99,7 +99,7 @@ const DashboardSide = () => {
           <ul className="space-y-4">{navLinks}</ul>
         </Drawer>
       </div>
-      <div className="hidden sm:block w-64 bg-blue-700/60 text-white min-h-screen max-h-screen">
+      <div className="hidden lg:block w-64 bg-blue-700/60 text-white min-h-screen max-h-screen">
         <h1 className="text-3xl font-bold text-center py-8">Dashboard Side</h1>
         <div className="px-5 space-y-4">
           <ul className="space-y-4">{navLinks}</ul>
