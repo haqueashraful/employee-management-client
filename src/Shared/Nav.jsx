@@ -114,7 +114,7 @@ const Nav = () => {
           </Menu.Item>
           <Menu.Item key="login">
             <NavLink to="/login">
-              <Button type="primary">Log in</Button>
+              <Button className="!border-none !bg-blue-700/50 !text-white" type="primary">Log in</Button>
             </NavLink>
           </Menu.Item>
         </>
@@ -160,7 +160,7 @@ const Nav = () => {
           </Dropdown>
         ) : (
           <NavLink to="/login">
-            <Button type="primary">Log in</Button>
+            <Button className="!border-none !bg-blue-700/50 !text-white" type="primary">Log in</Button>
           </NavLink>
         )}
       </div>
