@@ -1,7 +1,6 @@
-# Dev Care
-[Live Link](https://employeecare-ha.netlify.app)
+# Dev Care [Live Link](https://employeecare-ha.netlify.app)
 
->A complete _**Employee Management**_ System which is build on _**ReactJs**_ .
+A complete _**Employee Management**_ System which is build on _**ReactJs**_ .
 
 > Admin Email : ```ashrafulhaquerana321@gmail.com```
 
@@ -13,7 +12,7 @@
  npm run dev 
 ```
 
-## Key Features
+> ## Key Features
 --------------------
 1. `Payment integrate` For pay Employees salary 
 2. `Authentication` Implement with `Firebase` and `BackEnd`.  
