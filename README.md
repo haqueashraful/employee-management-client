@@ -4,9 +4,11 @@
 >A complete _**Employee Management**_ System which is build on _**ReactJs**_ .
 
 > Admin Email : ```ashrafulhaquerana321@gmail.com```
+
 > Admin Pass : ```Rana$Rana```
 
 
+> Run the file
 ```Run the file
  npm run dev 
 ```
