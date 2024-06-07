@@ -23,10 +23,22 @@ const EmployeeList = () => {
   const [paymentMonth, setPaymentMonth] = useState(null);
   const [paymentYear, setPaymentYear] = useState(null);
 
+
+  const { data: employees = [], isLoading, error, refetch } = useQuery({
+    queryKey: ["employees"],
+    queryFn: async () => {
+      const res = await axiosPublic.get("/users");
+      return res.data;
+    }
+  });
+
+  
   const handleToggleVerified = async (record) => {
     try {
-      const res = await axiosPublic.patch(`/users/verify/${record.email}`);
-      message.success(res.data.message);
+       await axiosPublic.patch(`/users/verify/${record.email}`).then(res =>{
+        refetch();
+        message.success(res.data.message);
+      });
     } catch (error) {
       console.error("Failed to toggle verified status", error);
       message.error("Failed to toggle verified status");
@@ -44,14 +56,6 @@ const EmployeeList = () => {
     setPaymentMonth(null);
     setPaymentYear(null);
   };
-
-  const { data: employees = [], isLoading, error } = useQuery({
-    queryKey: ["employees"],
-    queryFn: async () => {
-      const res = await axiosPublic.get("/users");
-      return res.data;
-    }
-  });
 
   const columns = [
     {

@@ -14,7 +14,7 @@ const ProjectsSection = () => {
     <div className="my-10 flex justify-center items-center flex-wrap gap-4 px-0 lg:px-10">
         {/* dine craft */}
       <Card
-      className=" overflow-hidden !border-blue-700/50"
+      className=" overflow-hidden !border-blue-700/50 w-full"
         hoverable
         style={{
           width: 240,
@@ -27,7 +27,7 @@ const ProjectsSection = () => {
 
       {/* smart ticket */}
       <Card
-      className=" overflow-hidden !border-blue-700/50"
+      className=" overflow-hidden !border-blue-700/50 w-full"
         hoverable
         style={{
           width: 240,
@@ -41,7 +41,7 @@ const ProjectsSection = () => {
 
       {/* R-Estate */}
       <Card
-      className=" overflow-hidden !border-blue-700/50"
+      className=" overflow-hidden !border-blue-700/50 w-full"
         hoverable
         style={{
           width: 240,
@@ -55,7 +55,7 @@ const ProjectsSection = () => {
 
        {/* R-Estate */}
        <Card
-      className=" overflow-hidden !border-blue-700/50"
+      className=" overflow-hidden !border-blue-700/50 w-full"
         hoverable
         style={{
           width: 240,
@@ -69,7 +69,7 @@ const ProjectsSection = () => {
 
       {/* Legal solutions */}
       <Card
-      className=" overflow-hidden !border-blue-700/50"
+      className=" overflow-hidden !border-blue-700/50 w-full"
         hoverable
         style={{
           width: 240,
@@ -83,7 +83,7 @@ const ProjectsSection = () => {
 
        {/* Haque Travel */}
        <Card
-      className=" overflow-hidden !border-blue-700/50"
+      className=" overflow-hidden !border-blue-700/50 w-full"
         hoverable
         style={{
           width: 240,
@@ -97,7 +97,7 @@ const ProjectsSection = () => {
       {/* Social Portal */}
 
       <Card
-      className=" overflow-hidden !border-blue-700/50"
+      className=" overflow-hidden !border-blue-700/50 w-full"
         hoverable
         style={{
           width: 240,

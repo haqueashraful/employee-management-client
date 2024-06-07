@@ -2,7 +2,7 @@ import { Table } from "antd";
 
 const CommonTable = ({ data, columns }) => {
   const pageSize = 5;
-
+  console.log(data)
   const dataSource = data.map((work, index) => ({
     ...work,
     index: index + 1,
