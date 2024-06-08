@@ -4,7 +4,7 @@ import useRole from "../Hooks/useRole";
 import Loading from "../Components/Loading";
 
 const Dashboard = () => {
-  const [role, isPending] = useRole();
+  const [, isPending] = useRole();
   if(isPending){
     return <Loading />
   }

@@ -4,7 +4,7 @@ import useUser from "../../Hooks/useUser";
 // import { Modal, Input, Button, Form } from 'antd';
 // import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import Loading from '../../Components/Loading';
-import PropTypes from 'prop-types'
+
 
 const DashboardHome = () => {
   const { user } = useAuth();
@@ -125,12 +125,7 @@ const DashboardHome = () => {
   );
 };
 
-DashboardHome.propTypes = {
-  userData: PropTypes.object,
-  user: PropTypes.object,
-  refetch: PropTypes.func,
-  isPending: PropTypes.bool,
-}
+
 
 export default DashboardHome;
 

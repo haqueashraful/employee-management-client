@@ -78,7 +78,6 @@ export const MyContext = ({ children }) => {
       setUser(currentUser);
     if(currentUser){
       const email = currentUser && currentUser.email;
-      // Check if the user is fired
       const firedResponse = await axiosPublic.get(`/users/fired/${email}`);
       const isFired = await firedResponse.data.isFired;
       if (isFired) {
@@ -144,4 +143,3 @@ export const MyContext = ({ children }) => {
   return <Context.Provider value={value}>{children}</Context.Provider>;
 };
 
-// export default MyContext;

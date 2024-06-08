@@ -16,24 +16,22 @@ const SocialLogin = () => {
       const user = result.user;
       const email = user.email;
   
-      // Check if the user already exists
       const existingUserResponse = await axiosPublic.get(`/users/${email}`);
       const existingUser = existingUserResponse.data;
   
       if (existingUser) {
-        Swal.fire({
-          position: "top-end",
-          icon: "info",
-          title: "User already exists",
-          text: "You are already registered.",
-          showConfirmButton: true,
-        });
-        // Redirect to the dashboard or some other page
+        // Swal.fire({
+        //   position: "top-end",
+        //   icon: "info",
+        //   title: "User already exists",
+        //   text: "You are already registered.",
+        //   showConfirmButton: true,
+        // });
         navigate("/");
-        return; // Exit early
+        return; 
       }
   
-      // Post user data to your backend
+      // Post user data to backend
       const response = await axiosPublic.post("/users", {
         name: user.displayName,
         email: email,
@@ -43,7 +41,6 @@ const SocialLogin = () => {
         photo: user.photoURL,
       });
   
-      // Check if the user data was successfully posted
       if (response.data.acknowledged) {
         Swal.fire({
           position: "top-end",
@@ -55,7 +52,6 @@ const SocialLogin = () => {
         // Redirect to the dashboard
         navigate("/dashboard");
       } else {
-        // Handle errors if the user data posting fails
         Swal.fire({
           position: "top-end",
           icon: "error",
@@ -65,7 +61,6 @@ const SocialLogin = () => {
         });
       }
     } catch (error) {
-      // Handle errors from Google sign-in or Axios request
       console.error("Error occurred during login:", error);
       Swal.fire({
         position: "top-end",

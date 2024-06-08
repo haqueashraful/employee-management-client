@@ -1,4 +1,5 @@
 import { Button, Card } from "antd";
+import PropTypes from 'prop-types';
 
 const AdminCardView = ({ employee, handleMakeHR, handleFire, handleSalaryAdjustment }) => {
     return (
@@ -30,5 +31,12 @@ const AdminCardView = ({ employee, handleMakeHR, handleFire, handleSalaryAdjustm
       </Card>
     );
 };
+
+AdminCardView.propTypes = {
+    employee: PropTypes.object.isRequired,
+    handleMakeHR: PropTypes.func.isRequired,
+    handleFire: PropTypes.func.isRequired,
+    handleSalaryAdjustment: PropTypes.func.isRequired
+}
 
 export default AdminCardView;

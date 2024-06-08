@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Button, Modal, Form,  Typography, message, Card, Row, Col, Switch } from 'antd';
+import { useState } from 'react';
+import { Button, Modal, Form,  Typography, message, Row, Col, Switch } from 'antd';
 import Swal from 'sweetalert2';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
@@ -19,7 +19,6 @@ const AllEmployee = () => {
     queryKey: ["employees"],
     queryFn: async () => {
       const res = await axiosSecure.get("/users/verified");
-      // const res = await axiosSecure.get("/users");
       return res.data;
     }
   });
@@ -194,6 +193,8 @@ const AllEmployee = () => {
 export default AllEmployee;
 
 
+
+// extra functionality Added after assignment marked
 
 
 // import { useState, useEffect, Children } from 'react';

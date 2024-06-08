@@ -90,7 +90,6 @@ const Nav = () => {
         </>
       ) : (
         <>
-          {" "}
           <Menu.Item key="home">
             <NavLink to="/">
               <Button type="link" className="!border-none">
