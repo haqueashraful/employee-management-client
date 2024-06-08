@@ -2,7 +2,6 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import moment from "moment";
 import { message } from "antd";
 import Swal from "sweetalert2";
 
@@ -145,7 +144,7 @@ const PaymentForm = ({ salary, selectedEmployee, paymentMonth, paymentYear, hand
           }}
         />
         <p className="text-red-500">{error}</p>
-        <button type="submit" disabled={!stripe || !clientSecret} className="border-b-4 text-white border-blue-700/50 rounded-md px-5 py-2 hover:bg-blue-700 font-semibold">
+        <button type="submit" disabled={!stripe || !clientSecret} className=" text-white bg-blue-700/50 rounded-md px-5 py-2 hover:bg-blue-700 font-semibold">
           Pay
         </button>
       </form>

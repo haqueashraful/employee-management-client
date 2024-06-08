@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Select, Table, Typography } from "antd";
+import { Select, Typography } from "antd";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import CommonTable from "../../Components/CommonTable";
@@ -16,7 +16,7 @@ const AllWorks = () => {
   const [totalWorkHours, setTotalWorkHours] = useState(0);
 
 
-  const {data : employees = [], isLoading, refetch } = useQuery({
+  const {data : employees = [], refetch } = useQuery({
     queryKey: ["employees"],
     queryFn: async () => {
       const res = await axiosPublic.get("/users");
@@ -26,7 +26,6 @@ const AllWorks = () => {
 
   useEffect(() => {
     const fetchMonths = async () => {
-      // Fetch months from your database or generate dynamically
       const months = [
         "January",
         "February",

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import { Card, List, Spin } from "antd";
+import { Card, List} from "antd";
 import Loading from "../../Components/Loading";
 
 const AllContact = () => {

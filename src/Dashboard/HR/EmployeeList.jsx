@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
-import { Table, Button, Modal, DatePicker, message } from "antd";
+import { useState } from "react";
+import { Button, Modal, DatePicker, message } from "antd";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import PaymentForm from "./PaymentForm"; 
 import CommonTable from "../../Components/CommonTable";
 import Loading from "../../Components/Loading";
@@ -16,7 +15,6 @@ const { MonthPicker } = DatePicker;
 
 const EmployeeList = () => {
   const axiosPublic = useAxiosPublic();
-  const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const [payModalVisible, setPayModalVisible] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState(null);

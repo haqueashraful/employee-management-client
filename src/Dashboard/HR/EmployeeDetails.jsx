@@ -1,11 +1,9 @@
 import { useParams } from "react-router-dom";
 import { Typography } from "antd";
-import { useEffect, useState } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../Components/Loading";
-
 const { Title } = Typography;
 
 const EmployeeDetails = () => {
@@ -20,7 +18,7 @@ const EmployeeDetails = () => {
     },
   });
 
-  const { data: employee, isLoading, error } = useQuery({
+  const { data: employee, error } = useQuery({
     queryKey: ["employees", email],
     queryFn: async () => {
       const res = await axiosPublic.get(`/payments/${email}`);
@@ -36,11 +34,11 @@ const EmployeeDetails = () => {
     return <div>Error fetching employee details</div>;
   }
 
-  const salaryData = employee.map((item, index) => ({ month: item.month, salary: item.salary }));
+  const salaryData = employee.map((item) => ({ month: item.month, salary: item.salary }));
 
   return (
     <div>
-      <Title level={2}>{user?.name}'s Details</Title>
+      <Title level={2}>{user?.name}&apos;s Details</Title>
       <div className="flex justify-center items-center gap-8">
        <div>
        <img src={user.photo} alt="Employee Photo" style={{ width: 200, height: 200, borderRadius: "10%" }} />

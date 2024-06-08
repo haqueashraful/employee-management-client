@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { Table } from "antd";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
@@ -8,15 +6,11 @@ import CommonTable from "../../Components/CommonTable";
 const PaymentHistory = () => {
   const { user } = useAuth();
   const axiosPublic = useAxiosPublic();
-  const [currentPage, setCurrentPage] = useState(1);
 
-  const { data: payments = [], isLoading } = useQuery({
-    queryKey: ["payments", currentPage, user?.email],
+  const { data: payments = [] } = useQuery({
+    queryKey: ["payments", user?.email],
     queryFn: async () => {
       const res = await axiosPublic.get(`/payments/${user?.email}`, {
-        params: {
-          page: currentPage,
-        },
       });
       return res.data;
     },
@@ -34,9 +28,9 @@ const PaymentHistory = () => {
       key: "month",
     },
     {
-      title: "Amount",
-      dataIndex: "amount",
-      key: "amount",
+      title: "salary($)",
+      dataIndex: "salary",
+      key: "salary",
     },
     {
       title: "Transaction Id",

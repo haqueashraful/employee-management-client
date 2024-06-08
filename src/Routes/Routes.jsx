@@ -16,11 +16,13 @@ import PrivateRoute from './PrivateRoute';
 import AdminRoute from './AdminRoute';
 import HrRoute from './HrRoute';
 import AllContact from '../Dashboard/HR/AllContact';
+import Error from '../Components/Error';
 
 const Routes = createBrowserRouter([
     {
         path: "/",
         element: <Layout />,
+        errorElement: <Error />,
         children: [
             {
                 path: "/",

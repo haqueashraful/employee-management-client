@@ -197,7 +197,7 @@ export default AllEmployee;
 
 
 // import { useState, useEffect, Children } from 'react';
-// import { Table, Button, Modal, Form, InputNumber, Typography, message, Card, Row, Col, Switch } from 'antd';
+// import { Button, Modal, Form, InputNumber, Typography, message, Card, Row, Col, Switch } from 'antd';
 // import Swal from 'sweetalert2';
 // import { useQuery } from '@tanstack/react-query';
 // import useAxiosSecure from '../../Hooks/useAxiosSecure';
