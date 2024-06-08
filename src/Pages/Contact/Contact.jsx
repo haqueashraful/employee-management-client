@@ -73,25 +73,25 @@ const Contact = () => {
           <h1 className="text-2xl font-bold text-blue-400">Send us a message</h1>
           <form onSubmit={contactSubmit} className="flex flex-col justify-center items-center gap-5">
             <input
-              className="w-full p-2 border"
+              className="w-full p-2 border border-blue-700/50 rounded-md focus:outline-none"
               name="name"
               type="text"
               placeholder="Name"
             />
             <input
-              className="w-full p-2 border"
+              className="w-full p-2 border border-blue-700/50 rounded-md focus:outline-none"
               name="email"
               type="email"
               placeholder="Email"
             />
             <input
-              className="w-full p-2 border"
+              className="w-full p-2 border border-blue-700/50 rounded-md focus:outline-none"
               name="phone"
               type="tel"
               placeholder="Phone"
             />
             <textarea
-              className="w-full p-2 border"
+              className="w-full p-2 border border-blue-700/50 rounded-md focus:outline-none"
               placeholder="Message"
               name="message"
               rows="5"

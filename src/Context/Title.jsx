@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 
 const Title = ({title}) => {
     return (
@@ -5,6 +7,10 @@ const Title = ({title}) => {
             <h1 className="text-3xl font-bold border-y py-5 text-center border-blue-700">{title}</h1>
         </div>
     );
+};
+
+Title.propTypes = {
+    title: PropTypes.string
 };
 
 export default Title;
