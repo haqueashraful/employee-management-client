@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useForm } from "react-hook-form";
@@ -45,7 +45,6 @@ const Register = () => {
         photo: imageUrl,
       })
       .then((res) => {
-      console.log(res.data);
       Swal.fire({
         position: "top-end",
         icon: "success",

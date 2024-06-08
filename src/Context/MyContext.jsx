@@ -3,6 +3,7 @@ import useAxiosPublic from "../Hooks/useAxiosPublic";
 import { GithubAuthProvider, GoogleAuthProvider, TwitterAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import auth from "../firebase/firebase.config";
 import Swal from "sweetalert2";
+import PropTypes from 'prop-types';
 
 
 export const Context = createContext();
@@ -143,3 +144,7 @@ export const MyContext = ({ children }) => {
   return <Context.Provider value={value}>{children}</Context.Provider>;
 };
 
+
+MyContext.propTypes = {
+  children: PropTypes.node.isRequired,
+};

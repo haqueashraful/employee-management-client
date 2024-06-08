@@ -31,7 +31,6 @@ const Contact = () => {
         form.reset()
       }
     })
-    console.log('submitted');
   }
   return (
     <div>

@@ -1,18 +1,16 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Button } from "antd";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import useAuth from "../Hooks/useAuth";
 import SocialLogin from "../Components/SocialLogin";
-import useAxiosPublic from "../Hooks/useAxiosPublic";
 import img from '../assets/login.svg'
 
 const Login = () => {
   const { logInUser, setLoader } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const axiosPublic = useAxiosPublic();
   const from = location.state?.from?.pathname || "/";
 
   const [loginError, setLoginError] = useState("");
@@ -21,10 +19,9 @@ const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data);
     try {
       setLoginError(""); 
-      const result = await logInUser(data.email, data.password);
+      await logInUser(data.email, data.password);
       navigate(from, { replace: true });
       setLoader(false);
     } catch (error) {
@@ -85,7 +82,7 @@ const Login = () => {
               </Button>
             </div>
           </form>
-          <p className="text-center">Don't have an account? <Link to="/register">Register</Link></p>
+          <p className="text-center">Don&apos;t have an account? <Link to="/register">Register</Link></p>
           <div className="text-center my-4 space-y-4">
             <p>Or sign in with</p>
             <SocialLogin />

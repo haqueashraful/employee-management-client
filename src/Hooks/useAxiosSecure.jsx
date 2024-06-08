@@ -1,6 +1,7 @@
 import axios from "axios";
 import useAuth from "./useAuth";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const axiosSecure = axios.create({
     baseURL: `${import.meta.env.VITE_API_URL}`,
@@ -17,7 +18,13 @@ const useAxiosSecure = () => {
             const status = error.response?.status;
 
             if (status === 403 || status === 401) {
-                console.log("Unauthorized or forbidden request, logging out...");
+                Swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: "Unauthorized or forbidden request",
+                    showConfirmButton: false,
+                    timer: 1500,
+                })
                 await logOutUser();
                 navigate("/login"); 
             }

@@ -54,8 +54,6 @@ const AllWorks = () => {
         if(selectedEmployee || selectedMonth) {
           uri += `employee=${selectedEmployee}&month=${selectedMonth < 10 && selectedMonth > 0 ? `0${selectedMonth}` : selectedMonth}`;
         }
-        console.log(selectedMonth)
-        console.log(uri)
         const response = await axiosPublic.get(uri);
         setWorkRecords(response.data);
         const totalHours = response.data.reduce(
@@ -77,7 +75,6 @@ const AllWorks = () => {
 
 
   const handleMonthChange = (value) => {
-    console.log(value, "value")
     setSelectedMonth(value);
   };
 

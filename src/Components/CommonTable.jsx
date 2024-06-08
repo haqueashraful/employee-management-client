@@ -1,8 +1,8 @@
 import { Table } from "antd";
+import PropTypes from "prop-types";
 
 const CommonTable = ({ data, columns }) => {
   const pageSize = 5;
-  console.log(data)
   const dataSource = data.map((work, index) => ({
     ...work,
     index: index + 1,
@@ -18,6 +18,11 @@ const CommonTable = ({ data, columns }) => {
       />
     </div>
   );
+};
+
+CommonTable.propTypes = {
+  data: PropTypes.array,
+  columns: PropTypes.array,
 };
 
 export default CommonTable;
