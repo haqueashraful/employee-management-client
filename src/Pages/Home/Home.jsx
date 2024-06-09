@@ -1,5 +1,4 @@
 import Services from "./Services";
-import Title from "../../Context/Title";
 import Slider from "./Slider";
 import Testimonial from "./Testimonial";
 import OurClient from "./OurClient";
@@ -7,6 +6,7 @@ import ProjectsSection from "./ProjectsSection";
 import FaqSection from "./FaqSection";
 import Loading from "../../Components/Loading";
 import ReviewSection from "./ReviewSection";
+import Title from "../../Components/Title";
 
 const Home = () => {
   return (

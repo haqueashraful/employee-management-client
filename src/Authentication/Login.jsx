@@ -82,7 +82,7 @@ const Login = () => {
               </Button>
             </div>
           </form>
-          <p className="text-center">Don&apos;t have an account? <Link to="/register">Register</Link></p>
+          <p className="text-center">Don&apos;t have an account? <Link to="/register" className="text-blue-500 underline" >Register</Link></p>
           <div className="text-center my-4 space-y-4">
             <p>Or sign in with</p>
             <SocialLogin />

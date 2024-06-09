@@ -61,8 +61,8 @@ const DashboardHome = () => {
 
         <div className="flex flex-col lg:flex-row justify-center items-center gap-10">
           {/* user image */}
-          <div className="text-center border rounded-lg border-blue-700 p-1">
-            <img className="size-72 rounded-lg hover:rotate-45 hover:transition hover:delay-200 hover:rounded-full" src={photo} alt="" />
+          <div className="text-center border rounded-lg border-blue-700 p-1 group">
+            <img className="size-72 rounded-lg group-hover:rotate-45 group-hover:transition hover:delay-200 hover:rounded-full" src={photo} alt="" />
           </div>
           {/* user details */}
           <div>

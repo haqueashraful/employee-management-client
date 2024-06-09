@@ -101,7 +101,6 @@ export const MyContext = ({ children }) => {
         axiosPublic.post("/jwt", { email : currentUser?.email})
           .then((response) => {
             setUser(currentUser);
-            console.log(response.data.token);
           })
           .catch((error) => {
             console.error("Failed to fetch token:", error);
