@@ -1,4 +1,4 @@
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, useFormState } from "react-hook-form";
 import { DatePicker, Button, Input, Select } from "antd";
 import moment from "moment";
 import useAuth from "../../Hooks/useAuth";
@@ -17,6 +17,11 @@ const WorkSheet = () => {
       hours: "",
       date: moment(),
     },
+    mode: "onChange",
+  });
+
+  const { isValid } = useFormState({
+    control,
   });
 
   const {
@@ -38,7 +43,7 @@ const WorkSheet = () => {
     };
 
     try {
-      await axiosPublic.post("/works", { ...newEntry, name: user.displayName });
+      await axiosPublic.post("/works", { ...newEntry, name: user.displayName, createdAt : new Date() });
       refetch();
       reset({
         task: "Sales",
@@ -88,6 +93,7 @@ const WorkSheet = () => {
         <Controller
           name="task"
           control={control}
+          rules={{ required: true }}
           render={({ field }) => (
             <Select {...field} className="w-40">
               <Option value="Sales">Sales</Option>
@@ -100,6 +106,7 @@ const WorkSheet = () => {
         <Controller
           name="hours"
           control={control}
+          rules={{ required: true, max: 999 }}
           render={({ field }) => (
             <Input
               {...field}
@@ -112,14 +119,16 @@ const WorkSheet = () => {
         <Controller
           name="date"
           control={control}
+          rules={{ required: true }}
           render={({ field }) => (
             <DatePicker {...field} defaultValue={moment()} className="w-40" />
           )}
         />
         <Button
-          className=" !bg-blue-700/50 !text-white"
+          className="!bg-blue-700/50 !text-white"
           type="primary"
           htmlType="submit"
+          disabled={!isValid}
         >
           Submit
         </Button>

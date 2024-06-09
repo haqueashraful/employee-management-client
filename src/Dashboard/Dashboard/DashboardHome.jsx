@@ -57,7 +57,7 @@ const DashboardHome = () => {
   return (
     <>
       <div className="flex flex-col justify-center items-center min-h-screen">
-        <h1 className="text-3xl font-bold text-center mb-20">Hi, Welcome <span className="text-blue-700">{name}</span>!</h1>
+        <h1 className="text-3xl font-bold text-center mb-20">Hey, Welcome back <span className="text-blue-700">{name}</span>!</h1>
 
         <div className="flex flex-col lg:flex-row justify-center items-center gap-10">
           {/* user image */}

@@ -19,13 +19,15 @@ const AllContact = () => {
     }
 
     return (
-        <div className="p-5">
+       <div>
+         <h1 className="text-3xl font-bold mb-5 text-center">All Contact</h1>
+         <div className="p-5">
             <List
                 grid={{ gutter: 16, column: 3 }}
                 dataSource={contacts}
                 renderItem={contact => (
                     <List.Item>
-                        <Card title={contact.name} bordered={false}>
+                        <Card title={contact.name}  className=" !border-blue-700/50">
                             <p><strong>Email:</strong> {contact.email}</p>
                             <p><strong>Phone:</strong> {contact.phone}</p>
                             <p><strong>Message:</strong> {contact.message}</p>
@@ -34,6 +36,7 @@ const AllContact = () => {
                 )}
             />
         </div>
+       </div>
     );
 };
 

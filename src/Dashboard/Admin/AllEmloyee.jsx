@@ -41,15 +41,15 @@ const AllEmployee = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: "Yes, Fired it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
           const response = await axiosSecure.patch(`/users/${employee.email}`, {
             isFired: true,
           });
-          if (response.data.modifiedCount > 0) {
-            Swal.fire("Deleted!", "The employee has been fired.", "success");
+          if (response.data.result.modifiedCount > 0) {
+            Swal.fire("Fired!", "The employee has been fired.", "success");
             refetch();
           } else {
             Swal.fire("Error!", "Failed to fire the employee.", "error");

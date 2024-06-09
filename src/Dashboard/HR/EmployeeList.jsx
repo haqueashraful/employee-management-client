@@ -72,9 +72,9 @@ const EmployeeList = () => {
       key: "isVerified",
       render: (verified, record) => (
         verified ? "✅" : (
-          <Button onClick={() => handleToggleVerified(record)}>
+          <span className="cursor-pointer" onClick={() => handleToggleVerified(record)}>
             ❌
-          </Button>
+          </span>
         )
       ),
     },

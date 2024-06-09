@@ -28,7 +28,6 @@ export const MyContext = ({ children }) => {
       .then(() => {
       })
       .catch((error) => {
-        console.log("Cannot update profile:", error.message);
       })
       .finally(() => {
         setLoad(false);
@@ -61,7 +60,6 @@ export const MyContext = ({ children }) => {
   const logOutUser = () => {
     return signOut(auth)
       .then(() => {
-        console.log("Logout successfully");
         setUser(null);
       })
       .catch((error) => {
