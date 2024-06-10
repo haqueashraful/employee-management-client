@@ -31,7 +31,7 @@ const EmployeeDetails = () => {
   }
 
   if (error || !employee) {
-    return <div>Error fetching employee details</div>;
+    return <div className="text-red-500 flex justify-center items-center">Error fetching employee details</div>;
   }
 
   const salaryData = employee.map((item) => ({ month: item.month, salary: item.salary }));

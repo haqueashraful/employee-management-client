@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <div>
       <Marquee speed={200} className="bg-green-700/50 py-5">
-        <p className="text-center text-white font-bold text-5xl">
+        <p className="text-center text-white font-bold text-3xl md:text-5xl">
           #Contact With Us Today
         </p>
       </Marquee>
@@ -37,17 +37,17 @@ const Footer = () => {
         <div className="lg:flex flex-col justify-end items-end">
           <p className="text-2xl font-bold">Connect in Social</p>
           <ul className="flex items-center gap-5 py-3">
-            <li className=" p-2 rounded-full text-2xl flex justify-center items-center bg-white text-blue-700">
+            <li className=" drop-shadow-xl p-2 rounded-full text-2xl flex justify-center items-center bg-white text-blue-700">
               <Link to="https://github.com/haqueashraful">
               <FaGithub />
               </Link>
             </li>
-            <li className=" p-2 rounded-full text-2xl flex justify-center items-center bg-white text-blue-700">
+            <li className=" drop-shadow-xl p-2 rounded-full text-2xl flex justify-center items-center bg-white text-blue-700">
               <Link to="https://www.facebook.com/profile.php?id=100051858772605">
               <FaFacebook />
               </Link>
             </li>
-            <li className=" p-2 rounded-full text-2xl flex justify-center items-center bg-white text-blue-700">
+            <li className=" drop-shadow-xl shadow-white p-2 rounded-full text-2xl flex justify-center items-center bg-white text-blue-700">
               <Link to="https://www.linkedin.com/in/a-h-rana">
               <FaLinkedinIn />
               </Link>

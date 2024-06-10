@@ -5,8 +5,9 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { message } from "antd";
 import Swal from "sweetalert2";
 
+
 const PaymentForm = ({
-  salary,
+  // salary,
   selectedEmployee,
   paymentMonth,
   paymentYear,
@@ -23,9 +24,9 @@ const PaymentForm = ({
     const checkDoublePayment = async () => {
       try {
         const res = await axiosSecure.get(
-          `/payment/${selectedEmployee?.email}?month=${paymentMonth.format(
+          `/payment/${selectedEmployee?.email}?month=${paymentMonth?.format(
             "MMMM"
-          )}&year=${paymentYear.format("YYYY")}`
+          )}&year=${paymentYear?.format("YYYY")}`
         );
         setDoublePay(res.data.exists);
       } catch (error) {
@@ -33,14 +34,16 @@ const PaymentForm = ({
       }
     };
 
-    checkDoublePayment();
+    if (selectedEmployee && paymentMonth && paymentYear) {
+      checkDoublePayment();
+    }
   }, [axiosSecure, paymentMonth, paymentYear, selectedEmployee]);
 
   useEffect(() => {
-    if (salary) {
+    if (selectedEmployee.salary) {
       axiosSecure
         .post("/create-payment-intent", {
-          amount: salary,
+          amount: selectedEmployee.salary,
           payment_method_types: ["card"],
         })
         .then((res) => {
@@ -50,7 +53,7 @@ const PaymentForm = ({
           console.error("Failed to create payment intent", error);
         });
     }
-  }, [axiosSecure, salary]);
+  }, [axiosSecure, selectedEmployee.salary, paymentMonth, paymentYear]);
 
   const handlePayment = async (event) => {
     event.preventDefault();
@@ -75,7 +78,7 @@ const PaymentForm = ({
       return;
     }
 
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
+    const { error: paymentMethodError, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card,
       billing_details: {
@@ -84,20 +87,20 @@ const PaymentForm = ({
       },
     });
 
-    if (error) {
-      setError(error.message);
+    if (paymentMethodError) {
+      setError(paymentMethodError.message);
       return;
     } else {
       setError(null);
     }
 
-    const { paymentIntent, error: intentError } =
+    const { paymentIntent, error: confirmError } =
       await stripe.confirmCardPayment(clientSecret, {
         payment_method: paymentMethod.id,
       });
 
-    if (intentError) {
-      setError(intentError.message);
+    if (confirmError) {
+      setError(confirmError.message);
     } else {
       if (paymentIntent.status === "succeeded") {
         Swal.fire({
@@ -110,7 +113,7 @@ const PaymentForm = ({
 
         const paymentDetails = {
           email: selectedEmployee?.email,
-          salary: salary,
+          salary: selectedEmployee?.salary,
           name: selectedEmployee?.name,
           photo: selectedEmployee?.photo,
           designation: selectedEmployee?.designation,
@@ -124,7 +127,6 @@ const PaymentForm = ({
 
         try {
           const result = await axiosSecure.post("/payments", paymentDetails);
-          console.log(result);
           if (result.data.acknowledged) {
             message.success("Salary paid successfully");
             handleModalClose();
@@ -162,7 +164,7 @@ const PaymentForm = ({
         <button
           type="submit"
           disabled={!stripe || !clientSecret}
-          className=" text-white bg-blue-700/50 rounded-md px-5 py-2 hover:bg-blue-700 font-semibold"
+          className="text-white bg-blue-700/50 rounded-md px-5 py-2 hover:bg-blue-700 font-semibold"
         >
           Pay
         </button>

@@ -51,7 +51,7 @@ const ReviewSection = () => {
     };
 
     return (
-        <div className="p-5 bg-white rounded-md shadow-md my-10">
+        <div className="p-5 bg-white rounded-md drop-shadow-xl my-10">
            <div className="flex lg:flex-row flex-col justify-center items-center gap-4">
             {/* image */}
                 <div className="w-full lg:w-1/2 h-1/2 overflow-hidden">

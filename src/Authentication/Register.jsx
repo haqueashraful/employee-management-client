@@ -11,14 +11,12 @@ import img from "../assets/register.svg";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Loading from "../Components/Loading";
 
-
 const Register = () => {
   const { registerUser, profileUpdate, loader, setLoader } = useAuth();
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
   const [showPassword, setShowPassword] = useState(false);
 
-  
   const {
     register,
     handleSubmit,
@@ -39,10 +37,9 @@ const Register = () => {
         formData
       );
       const imageUrl = imgBBResponse.data.data.url;
-      await registerUser(data.email, data.password)
-        .then((result) => {
-          setLoader(false);
-        })
+      await registerUser(data.email, data.password).then((result) => {
+        setLoader(false);
+      });
       await profileUpdate(data.name, imageUrl);
 
       await axiosPublic
@@ -82,7 +79,7 @@ const Register = () => {
 
   return (
     <div className="w-full min-h-screen p-5 lg:p-28 overflow-hidden">
-      <div className="border-2 border-black shadow-2xl w-full h-full overflow-hidden py-8 px-20 grid grid-cols-1 md:grid-cols-2 justify-center items-center gap-8">
+      <div className="border-2 border-black shadow-2xl w-full h-full overflow-hidden py-8 px-5 lg:px-20 grid grid-cols-1 md:grid-cols-2 justify-center items-center gap-8">
         <div>
           <img className="" src={img} alt="" />
         </div>
@@ -200,18 +197,20 @@ const Register = () => {
               </label>
               <input
                 type="number"
-                {...register("salary", { required: true, max: 999 })}
+                {...register("salary", {
+                  required: "Salary is required",
+                  min: { value: 99, message: "Salary must be at least 99" },
+                  max: {
+                    value: 999,
+                    message: "Salary cannot be greater than 999",
+                  },
+                })}
                 id="salary"
                 placeholder="Salary"
                 className="w-full p-2 border rounded-md"
               />
-              {errors.salary && errors.salary.type === "required" && (
-                <span className="text-red-600">Salary is required</span>
-              )}
-              {errors.salary && errors.salary.type === "max" && (
-                <span className="text-red-600">
-                  Salary cannot be greater than 999
-                </span>
+              {errors.salary && (
+                <span className="text-red-600">{errors.salary.message}</span>
               )}
             </div>
 
@@ -268,9 +267,7 @@ const Register = () => {
                 htmlType="submit"
               >
                 {/* Register */}
-                {
-                  loader ? <Loading /> : "Register"
-                }
+                {loader ? <Loading /> : "Register"}
               </Button>
             </div>
           </form>

@@ -52,3 +52,14 @@ body {
       0 0 60px rgba(0, 0, 0, 0.4);
   }
 }
+
+
+input{
+  filter: drop-shadow(0 0 5px #85b7fd);
+}
+textarea{
+  filter: drop-shadow(0 0 5px #85b7fd);
+}
+select{
+  filter: drop-shadow(0 0 5px #85b7fd);
+}

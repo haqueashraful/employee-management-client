@@ -87,8 +87,8 @@ const AllWorks = () => {
 
   return (
     <div>
-      <div className="flex lg:flex-row flex-col justify-between">
-        <div className="flex items-center">
+      <div className="flex lg:flex-row flex-col justify-between gap-4 my-5">
+        <div className="flex items-center justify-between lg:justify-normal gap-4">
           <Title className=" !text-base lg:!text-xl">Filter by Employee:</Title>
           <Select
             defaultValue="All Employees"
@@ -103,7 +103,7 @@ const AllWorks = () => {
             ))}
           </Select>
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center justify-between lg:justify-normal gap-4">
           <Title className=" !text-base lg:!text-xl">Filter by Month:</Title>
           <Select
             defaultValue="All Months"
