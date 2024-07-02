@@ -6,6 +6,15 @@ A complete _**Employee Management**_ System which is build on _**ReactJs**_ .
 
 > Admin Pass : ```Rana$Rana```
 
+> Clone the project: 
+``` clone full 
+git clone https://github.com/haqueashraful/employee-management-client.git
+```
+
+> Change directory: 
+``` change directory
+cd employee-management-client
+```
 
 > Make Ready for Run: 
 ``` Install dependencies
